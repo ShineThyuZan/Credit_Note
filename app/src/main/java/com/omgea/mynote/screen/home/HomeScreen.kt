@@ -140,6 +140,7 @@ fun HomeTopBar(
     modifier: Modifier = Modifier
 ) {
     SmallTopAppBar(
+
         title = {
             Text(
                 text = stringResource(id = R.string.note_list),
