@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.androidperu.peopleapp">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.omgea.mynote">
 
     <application
+        android:name="com.omgea.mynote.ui.MyNoteApp"
         android:allowBackup="true"
-        android:name=".UserApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PeopleApp">
+        android:theme="@style/Theme.MyNote"
+        tools:targetApi="33"
+       >
         <activity
-            android:name=".feature_users.presentation.MainActivity"
+            android:name="com.omgea.mynote.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.PeopleApp.NoActionBar">
+            android:theme="@style/Theme.MyNote">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,5 +25,8 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
+
+
+
+
