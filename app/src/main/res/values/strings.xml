@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AK Note</string>
+    <string name="note_list">AK Statement List</string>
+    <string name="add_new_note">Add New Note</string>
+
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="amount">Amount</string>
+    <string name="error">Input type Mismatch!!</string>
+</resources>
