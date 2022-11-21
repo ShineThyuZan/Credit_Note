@@ -57,7 +57,7 @@ class HomeViewModel @Inject constructor(
                 }
             }
             is HomeAction.ClickDeleteOk -> {
-                if (state.value.passwordForDelete == "000") {
+                if (state.value.passwordForDelete == "044299") {
                     viewModelScope.launch {
                         _state.value = state.value.copy(
                             isError = false,
@@ -101,7 +101,7 @@ class HomeViewModel @Inject constructor(
 
             }
             is HomeAction.ClickEditOk -> {
-                if (state.value.passwordForEdit == "111") {
+                if (state.value.passwordForEdit == "044288") {
                     viewModelScope.launch {
                         _state.value = state.value.copy(
                             isError = false,

@@ -1,10 +1,16 @@
 <resources>
-    <string name="app_name">AK Note</string>
-    <string name="note_list">AK Statement List</string>
-    <string name="add_new_note">Add New Note</string>
+    <string name="app_name">AK စာရင်း</string>
+    <string name="note_list">AK( စာရင်း )</string>
+    <string name="add_new_note">မှတ်စုအသစ် ထည့်ပါ။</string>
 
-    <string name="name">Name</string>
-    <string name="description">Description</string>
-    <string name="amount">Amount</string>
-    <string name="error">Input type Mismatch!!</string>
+    <string name="name">နာမည်</string>
+    <string name="name_place_holder">နာမည် ထည့်သွင်းပါ။</string>
+    <string name="description">ဖော်ပြချက်</string>
+    <string name="description_place_holder">ဖော်ပြချက် ထည့်သွင်းပါ။</string>
+
+    <string name="amount">ပမာဏ</string>
+    <string name="amount_placeholder">ပမာဏ ထည့်သွင်းပါ။</string>
+    <string name="error">ထည့်သွင်းမှုအမျိုးအစား မတိုက်ဆိုင်ပါ။</string>
+
+    <string name="password">စကားဝှက်</string>
 </resources>

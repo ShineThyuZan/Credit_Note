@@ -10,11 +10,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import com.omgea.mynote.R
 
 enum class ButtonType {
     SOLID_BUTTON,
@@ -53,7 +55,7 @@ fun CommonDialog(
         text = {
             Column {
                 if (isErrorPassword)
-                    VisibilityAnimator(isVisible = isErrorPassword)
+                    VisibilityAnimator(isVisible = true)
                 else
                     Text(text = "", Modifier.height(36.dp))
 
@@ -61,7 +63,7 @@ fun CommonDialog(
                     modifier = modifier
                         .fillMaxWidth(),
                     onValueChanged = onPasswordValueChanged,
-                    placeholder = "Password",
+                    placeholder = stringResource(id = R.string.password),
                     password = passwordValue,
                     imeAction = ImeAction.Done,
                     keyboardType = KeyboardType.NumberPassword,

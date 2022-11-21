@@ -1,7 +1,9 @@
 package com.omgea.mynote.common
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActionScope
@@ -14,11 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.omgea.mynote.R
+import com.omgea.mynote.ui.theme.dimen
 
 @Composable
 fun CommonTextField(
@@ -82,6 +89,7 @@ fun CommonTextField(
                             text = placeholder,
                             color = Color.Gray,
                             style = MaterialTheme.typography.titleSmall,
+                            modifier = Modifier.padding(start = MaterialTheme.dimen.small)
                         )
                     }
                     innerTextField()

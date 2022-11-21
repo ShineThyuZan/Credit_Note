@@ -24,6 +24,7 @@ import com.omgea.mynote.model.UserVo
 import com.omgea.mynote.screen.home.components.HomeAction
 import com.omgea.mynote.screen.home.components.UserItem
 import com.omgea.mynote.ui.theme.MyNoteTheme
+import com.omgea.mynote.ui.theme.dimen
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,7 +48,7 @@ fun HomeScreen(
     }
 
     if (state.showDialog) {
-        when(state.dialogType){
+        when (state.dialogType) {
             DialogType.NOTHING -> {}
             DialogType.EDIT -> {
                 CommonDialog(
@@ -146,6 +147,7 @@ fun HomeTopBar(
                 textAlign = TextAlign.Center,
                 modifier = modifier
                     .fillMaxSize()
+                    .size(MaterialTheme.dimen.base)
                     .wrapContentSize(Alignment.Center)
             )
         },
@@ -166,6 +168,10 @@ fun HomeContent(
         LazyColumn {
             items(userVos) { user ->
                 UserItem(
+                    modifier = Modifier.padding(
+                        start = MaterialTheme.dimen.small,
+                        end = MaterialTheme.dimen.small
+                    ),
                     user = user,
                     onEditUser = { onEditUser(user) },
                     onDeleteUser = { onDeleteUser(user) }

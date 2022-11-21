@@ -126,7 +126,7 @@ fun EditContent(
         Spacer(modifier = Modifier.height(84.dp))
 
         CommonTextField(
-            placeholder = stringResource(id = R.string.name),
+            placeholder = stringResource(id = R.string.name_place_holder),
             textFieldLabel = stringResource(id = R.string.name),
             /*   isError = isError,*/
             value = name,
@@ -138,7 +138,7 @@ fun EditContent(
         Spacer(modifier = Modifier.height(16.dp))
 
         CommonTextField(
-            placeholder = stringResource(id = R.string.description),
+            placeholder = stringResource(id = R.string.description_place_holder),
             textFieldLabel = stringResource(id = R.string.description),
             /*   isError = isError,*/
             value = description,
@@ -150,7 +150,7 @@ fun EditContent(
         Spacer(modifier = Modifier.height(16.dp))
 
         CommonTextField(
-            placeholder = stringResource(id = R.string.amount),
+            placeholder = stringResource(id = R.string.amount_placeholder),
             textFieldLabel = stringResource(id = R.string.amount),
             /*   isError = isError,*/
             value = amount,
