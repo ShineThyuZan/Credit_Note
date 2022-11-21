@@ -34,7 +34,7 @@ fun SplashScreen(
     val alphaAnimation = animateFloatAsState(
         targetValue = if (logoAnimation) 0f else 1f,
         animationSpec = tween(
-            durationMillis = 1000
+            durationMillis = 3000
         )
     )
     LaunchedEffect(key1 = true) {

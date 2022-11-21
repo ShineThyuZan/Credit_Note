@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.omgea.mynote.R
+import com.omgea.mynote.ui.theme.dimen
 
 enum class ButtonType {
     SOLID_BUTTON,
@@ -57,7 +58,7 @@ fun CommonDialog(
                 if (isErrorPassword)
                     VisibilityAnimator(isVisible = true)
                 else
-                    Text(text = "", Modifier.height(36.dp))
+                    Text(text = "", Modifier.height(MaterialTheme.dimen.base_4x))
 
                 PasswordTextField(
                     modifier = modifier

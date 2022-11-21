@@ -48,8 +48,8 @@ fun CommonTextField(
         if (textFieldLabel.isNotEmpty()) {
             Text(
                 modifier = modifier.padding(
-                    vertical = 4.dp,
-                    horizontal = 8.dp
+                    vertical = MaterialTheme.dimen.small,
+                    horizontal = MaterialTheme.dimen.base
                 ),
                 text = textFieldLabel,
                 style = MaterialTheme.typography.titleSmall,
@@ -59,12 +59,12 @@ fun CommonTextField(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .height(56.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .height(MaterialTheme.dimen.base_7x)
+                .clip(RoundedCornerShape(MaterialTheme.dimen.base_2x))
                 .border(
                     width = 1.dp,
                     color = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onBackground,
-                    shape = RoundedCornerShape(16.dp)
+                    shape = RoundedCornerShape(MaterialTheme.dimen.base_2x)
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -72,7 +72,7 @@ fun CommonTextField(
             BasicTextField(
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = MaterialTheme.dimen.base)
                     .weight(1f, fill = false),
                 value = value,
                 onValueChange = {
@@ -109,7 +109,7 @@ fun CommonTextField(
             if (value.isNotEmpty()) {
                 IconButton(onClick = onValueCleared) {
                     Icon(
-                        painter = painterResource(id = com.omgea.mynote.R.drawable.ic_cross),
+                        painter = painterResource(id = R.drawable.ic_cross),
                         contentDescription = "Trailing Icon",
                         tint = MaterialTheme.colorScheme.surfaceVariant
                     )

@@ -75,14 +75,14 @@ fun UserItem(
         supportingText = {
             Text(
                 text = stringResource(id = R.string.amount) + " - " + user.age.toString(),
-                style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.primary)
+                style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.primary)
             )
 
         },
         overlineText = {
             Text(
                 text = stringResource(id = R.string.name) + " - " + user.name,
-                style = MaterialTheme.typography.titleSmall
+                style = MaterialTheme.typography.titleMedium
             )
         },
     )

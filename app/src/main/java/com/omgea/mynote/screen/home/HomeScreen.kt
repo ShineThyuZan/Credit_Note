@@ -54,13 +54,13 @@ fun HomeScreen(
                 CommonDialog(
                     modifier = Modifier.fillMaxWidth(),
                     passwordValue = state.passwordForEdit,
-                    dismissButtonLabel = "Cancel",
+                    dismissButtonLabel = stringResource(id = R.string.cancel),
                     dismissAction = {
                         viewModel.onAction(
                             HomeAction.ClickEditCancel
                         )
                     },
-                    confirmButtonLabel = "OK",
+                    confirmButtonLabel = stringResource(id = R.string.OK),
                     confirmButtonType = ButtonType.SOLID_BUTTON,
                     confirmButtonAction = {
                         viewModel.onAction(HomeAction.ClickEditOk(user = state.editUser))
@@ -81,13 +81,13 @@ fun HomeScreen(
                 CommonDialog(
                     modifier = Modifier.fillMaxWidth(),
                     passwordValue = state.passwordForDelete,
-                    dismissButtonLabel = "Cancel",
+                    dismissButtonLabel = stringResource(id = R.string.cancel),
                     dismissAction = {
                         viewModel.onAction(
                             HomeAction.ClickDeleteCancel
                         )
                     },
-                    confirmButtonLabel = "OK",
+                    confirmButtonLabel = stringResource(id = R.string.OK),
                     confirmButtonType = ButtonType.SOLID_BUTTON,
                     confirmButtonAction = {
                         viewModel.onAction(HomeAction.ClickDeleteOk)
@@ -108,6 +108,7 @@ fun HomeScreen(
     }
 
     Scaffold(
+        modifier = Modifier,
         topBar = {
             HomeTopBar()
         },
@@ -162,8 +163,8 @@ fun HomeContent(
     userVos: List<UserVo> = emptyList()
 ) {
     Surface(
+        modifier = modifier,
         color = MaterialTheme.colorScheme.surface,
-        modifier = modifier
     ) {
         LazyColumn {
             items(userVos) { user ->

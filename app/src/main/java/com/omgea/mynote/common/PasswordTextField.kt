@@ -71,7 +71,7 @@ fun PasswordTextField(
             BasicTextField(
                 modifier = modifier
                     .wrapContentHeight(align = Alignment.CenterVertically)
-                    .padding(start = 16.dp)
+                    .padding(start = MaterialTheme.dimen.base_2x)
                     .weight(1f),
                 value = password,
                 onValueChange = {
