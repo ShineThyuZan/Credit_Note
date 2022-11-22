@@ -59,7 +59,6 @@ fun CommonDialog(
                     VisibilityAnimator(isVisible = true)
                 else
                     Text(text = "", Modifier.height(MaterialTheme.dimen.base_4x))
-
                 PasswordTextField(
                     modifier = modifier
                         .fillMaxWidth(),
@@ -73,7 +72,6 @@ fun CommonDialog(
 
                 )
             }
-
         },
         dismissButton = {
             if (dismissButtonLabel.isNotEmpty()) {

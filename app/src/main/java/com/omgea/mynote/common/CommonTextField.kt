@@ -17,6 +17,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
@@ -62,18 +66,18 @@ fun CommonTextField(
                 .height(MaterialTheme.dimen.base_7x)
                 .clip(RoundedCornerShape(MaterialTheme.dimen.base_2x))
                 .border(
-                    width = 1.dp,
+                    width = 0.5.dp,
                     color = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onBackground,
                     shape = RoundedCornerShape(MaterialTheme.dimen.base_2x)
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-
             BasicTextField(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(horizontal = MaterialTheme.dimen.base)
-                    .weight(1f, fill = false),
+                    .weight(1f, fill = false)
+                ,
                 value = value,
                 onValueChange = {
                     if (it.length <= 30) {
@@ -100,7 +104,10 @@ fun CommonTextField(
                     imeAction = imeAction
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = keyboardAction
+                    onDone = keyboardAction,
+                    onGo = keyboardAction,
+                    onNext = keyboardAction
+
                 ),
                 cursorBrush = SolidColor(
                     value = MaterialTheme.colorScheme.primary
@@ -116,7 +123,6 @@ fun CommonTextField(
                 }
             }
         }
-
     }
 }
 

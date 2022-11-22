@@ -45,9 +45,7 @@ fun UserItem(
             leadingIconColor = MaterialTheme.colorScheme.onSurface,
             headlineColor = MaterialTheme.colorScheme.onSurface,
         ),
-        leadingContent = {
-
-        },
+        leadingContent = {},
         trailingContent = {
             Row {
                 IconButton(onClick = onEditUser) {
@@ -77,7 +75,6 @@ fun UserItem(
                 text = stringResource(id = R.string.amount) + " - " + user.age.toString(),
                 style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.primary)
             )
-
         },
         overlineText = {
             Text(
@@ -92,7 +89,7 @@ fun UserItem(
 @Preview(showBackground = true)
 @Composable
 fun PreviewUserItem() {
-    MyNoteTheme() {
+    MyNoteTheme {
         UserItem(
             user = UserVo(name = "Adam", lastName = "Smith", age = 15),
             onEditUser = {},

@@ -1,11 +1,14 @@
 package com.omgea.mynote.screen.edit
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -18,7 +21,10 @@ import com.omgea.mynote.common.CommonTextField
 import com.omgea.mynote.ui.theme.MyNoteTheme
 import kotlinx.coroutines.flow.collectLatest
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalComposeUiApi::class
+)
 @Composable
 fun EditScreen(
     navController: NavController,
@@ -28,6 +34,7 @@ fun EditScreen(
     val nameState = state.userName
     val lastNameState = state.lastName
     val ageState = state.age
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -73,8 +80,8 @@ fun EditScreen(
                 },
                 amountTextClear = {
                     viewModel.onAction(EditAction.EnterAmount(amountText = ""))
-
-                }
+                },
+                keyboard = { keyboardController?.hide() }
             )
         },
         bottomBar = {
@@ -116,6 +123,7 @@ fun EditContent(
     amount: String,
     amountTextChange: (String) -> Unit,
     amountTextClear: () -> Unit,
+    keyboard: (KeyboardActionScope) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -132,7 +140,8 @@ fun EditContent(
             value = name,
             onValueChanged = nameTextChange,
             onValueCleared = nameTextClear,
-            errorMessage = stringResource(id = R.string.error)
+            errorMessage = stringResource(id = R.string.error),
+            keyboardAction = keyboard
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -144,7 +153,8 @@ fun EditContent(
             value = description,
             onValueChanged = descriptionTextChange,
             onValueCleared = descriptionClear,
-            errorMessage = stringResource(id = R.string.error)
+            errorMessage = stringResource(id = R.string.error),
+            keyboardAction = keyboard
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -157,7 +167,8 @@ fun EditContent(
             onValueChanged = amountTextChange,
             onValueCleared = amountTextClear,
             errorMessage = stringResource(id = R.string.error),
-            keyboardType = KeyboardType.Number
+            keyboardType = KeyboardType.Number,
+            keyboardAction = keyboard
         )
     }
 }
@@ -202,7 +213,8 @@ fun PreviewAddEditUserContent() {
             descriptionClear = {},
             descriptionTextChange = {},
             amountTextClear = {},
-            amountTextChange = {}
+            amountTextChange = {},
+            keyboard = {}
         )
     }
 }
