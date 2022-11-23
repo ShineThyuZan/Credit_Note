@@ -123,6 +123,17 @@ class HomeViewModel @Inject constructor(
                     passwordForEdit = action.passwordValueChange
                 )
             }
+            is HomeAction.ClickActionMore -> {
+                _state.value = state.value.copy(
+                    clearUser = action.user,
+                    editUser = action.user
+                )
+                viewModelScope.launch {
+                    _homeEvent.emit(
+                        HomeEvent.ShowMenu
+                    )
+                }
+            }
         }
     }
 

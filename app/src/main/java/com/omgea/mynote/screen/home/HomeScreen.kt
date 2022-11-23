@@ -3,14 +3,21 @@ package com.omgea.mynote.screen.home
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -25,17 +32,23 @@ import com.omgea.mynote.graph.Destination
 import com.omgea.mynote.model.UserVo
 import com.omgea.mynote.screen.home.components.CustomListItem
 import com.omgea.mynote.screen.home.components.HomeAction
+import com.omgea.mynote.screen.home.components.MoreActionSheetView
+import com.omgea.mynote.screen.home.components.MoreActionStatus
 import com.omgea.mynote.ui.theme.MyNoteTheme
 import com.omgea.mynote.ui.theme.dimen
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+    val modalBottomSheetState =
+        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = true) {
         viewModel.homeEvent.collectLatest {
@@ -44,6 +57,9 @@ fun HomeScreen(
                     navController.navigate(
                         route = Destination.Edit.passId(it.userId)
                     )
+                }
+                HomeEvent.ShowMenu -> {
+                    modalBottomSheetState.show()
                 }
             }
         }
@@ -109,34 +125,75 @@ fun HomeScreen(
         }
     }
 
-    Scaffold(
-        modifier = Modifier,
-        topBar = {
-            HomeTopBar()
-        },
-        floatingActionButton = {
-            HomeFab(
-                onFabClicked = { navController.navigate(Destination.Edit.route) }
+    ModalBottomSheetLayout(
+        sheetState = modalBottomSheetState,
+        sheetContent = {
+            MoreActionSheetView(
+                onItemClick = { mediaDetailSheetType ->
+                    when (mediaDetailSheetType) {
+                        MoreActionStatus.EDIT_NOTE.index -> {
+                            scope.launch {
+                                modalBottomSheetState.hide()
+                            }
+                            viewModel.onAction(
+                                HomeAction.ClickEdit(user = state.editUser)
+                            )
+                            /* download()*/
+                        }
+                        MoreActionStatus.DELETE.index -> {
+                            scope.launch {
+                                modalBottomSheetState.hide()
+                            }
+                            viewModel.onAction(
+                                HomeAction.ClickDelete(user = state.clearUser)
+                            )
+                            /*  vm.onActionImage(ImageAction.ClickReport)*/
+                        }
+                    }
+                }
             )
         },
-        content = { innerPadding ->
-            HomeContent(
-                modifier = Modifier.padding(innerPadding),
-                onDeleteUser = {
-                    viewModel.onAction(
-                        HomeAction.ClickDelete(user = it)
-                    )
-                    /*  viewModel.onEvent(HomeEvent.DeleteUser(it))*/
-                },
-                onEditUser = {
-                    viewModel.onAction(
-                        HomeAction.ClickEdit(user = it)
-                    )
-                },
-                userVos = state.usersList
-            )
-        }
-    )
+        sheetShape = RoundedCornerShape(
+            topStart = MaterialTheme.dimen.base_2x,
+            topEnd = MaterialTheme.dimen.base_2x,
+        ),
+        sheetBackgroundColor = MaterialTheme.colorScheme.surface,
+        scrimColor = Color.Black.copy(0.7f)
+    ) {
+        Scaffold(
+            modifier = Modifier,
+            topBar = {
+                HomeTopBar()
+            },
+            floatingActionButton = {
+                HomeFab(
+                    onFabClicked = { navController.navigate(Destination.Edit.route) }
+                )
+            },
+            content = { innerPadding ->
+                HomeContent(
+                    modifier = Modifier.padding(innerPadding),
+                    onDeleteUser = {
+                        viewModel.onAction(
+                            HomeAction.ClickDelete(user = it)
+                        )
+                        /*  viewModel.onEvent(HomeEvent.DeleteUser(it))*/
+                    },
+                    onEditUser = {
+                        viewModel.onAction(
+                            HomeAction.ClickEdit(user = it)
+                        )
+                    },
+                    userVos = state.usersList,
+                    onClickMoreAction = { userVo ->
+                        viewModel.onAction(
+                            HomeAction.ClickActionMore(userVo)
+                        )
+                    }
+                )
+            }
+        )
+    }
 }
 
 @Composable
@@ -162,7 +219,8 @@ fun HomeContent(
     modifier: Modifier = Modifier,
     onDeleteUser: (userVo: UserVo) -> Unit,
     onEditUser: (userVo: UserVo) -> Unit,
-    userVos: List<UserVo> = emptyList()
+    userVos: List<UserVo> = emptyList(),
+    onClickMoreAction: (userVo: UserVo) -> Unit,
 ) {
     Surface(
         modifier = modifier,
@@ -179,7 +237,10 @@ fun HomeContent(
                         .clip(RectangleShape),
                     user = user,
                     onEditUser = { onEditUser(user) },
-                    onDeleteUser = { onDeleteUser(user) }
+                    onDeleteUser = { onDeleteUser(user) },
+                    onClickMoreActionIcon = {
+                        onClickMoreAction(user)
+                    }
                 )
             }
         }
@@ -208,7 +269,9 @@ fun HomeFab(
 @Composable
 fun PreviewUserContent() {
     MyNoteTheme(darkTheme = false) {
-        HomeContent(onDeleteUser = {}, onEditUser = {})
+        HomeContent(onDeleteUser = {},
+            onEditUser = {},
+            onClickMoreAction = {})
     }
 }
 

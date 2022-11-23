@@ -52,17 +52,20 @@ class EditViewModel @Inject constructor(
         when (action) {
             is EditAction.EnteredName -> {
                 _state.value = state.value.copy(
-                    userName = action.nameText
+                    userName = action.nameText,
+                    isSomethingEdited = true
                 )
             }
             is EditAction.EnteredDescription -> {
                 _state.value = state.value.copy(
-                    lastName = action.descText
+                    lastName = action.descText,
+                    isSomethingEdited = true
                 )
             }
             is EditAction.EnterAmount -> {
                 _state.value = state.value.copy(
-                    age = action.amountText
+                    age = action.amountText,
+                    isSomethingEdited = true
                 )
                 if (action.amountText == "" || state.value.userName == "") {
                     _state.value = state.value.copy(
@@ -94,6 +97,9 @@ class EditViewModel @Inject constructor(
                         EditUIEvent.HideDobPicker
                     )
                 }
+            }
+            EditAction.ClickItemMore -> {
+
             }
         }
     }
@@ -138,6 +144,7 @@ class EditViewModel @Inject constructor(
 
     sealed class EditUIEvent {
         object SaveUser : EditUIEvent()
+
         object ShowDobPicker : EditUIEvent()
         object HideDobPicker : EditUIEvent()
 

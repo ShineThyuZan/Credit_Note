@@ -1,16 +1,17 @@
 package com.omgea.mynote.screen.home.components
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,27 +26,34 @@ fun CustomListItem(
     user: UserVo,
     onEditUser: () -> Unit,
     onDeleteUser: () -> Unit,
+    onClickMoreActionIcon: () -> Unit,
 ) {
     Column(
         Modifier
+            .defaultMinSize(MaterialTheme.dimen.base_8x)
+            .padding(
+                MaterialTheme.dimen.base,
+            )
             .border(
                 border = BorderStroke(
                     0.33.dp,
                     color = MaterialTheme.colorScheme.onErrorContainer
-                ), shape = RectangleShape
+                ),
             )
-            .padding(
-                MaterialTheme.dimen.base_2x,
-            )
-            .defaultMinSize(MaterialTheme.dimen.base_8x)
-
+            .clip(shape = RoundedCornerShape(MaterialTheme.dimen.base))
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    start = MaterialTheme.dimen.base,
+                    end = MaterialTheme.dimen.base,
+                    top = MaterialTheme.dimen.base
+                )
         ) {
             Text(
                 modifier = modifier.weight(1f),
-                text = stringResource(id = R.string.date) + " - " + user.date,
+                text = user.date,
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Start
             )
@@ -55,8 +63,11 @@ fun CustomListItem(
                 textAlign = TextAlign.End
             )
         }
-        Spacer(modifier = modifier.size(MaterialTheme.dimen.base))
-        Row(modifier = Modifier.fillMaxSize()) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(MaterialTheme.dimen.base)
+        ) {
             Text(
                 modifier = modifier.weight(1f),
                 text = stringResource(id = R.string.name) + " - " + user.name,
@@ -71,21 +82,43 @@ fun CustomListItem(
         }
         Row(
             modifier = Modifier
+                .padding(
+                    end = MaterialTheme.dimen.base,
+                    bottom = MaterialTheme.dimen.base
+                )
                 .align(alignment = Alignment.End)
                 .wrapContentSize()
         ) {
-            IconButton(onClick = onEditUser) {
+            /*  IconButton(onClick = onEditUser) {
+                  Icon(
+                      imageVector = Icons.Filled.Edit,
+                      contentDescription = null,
+                      tint = MaterialTheme.colorScheme.inversePrimary
+                  )
+              }
+              IconButton(onClick = onDeleteUser) {
+                  Icon(
+                      imageVector = Icons.Filled.Delete,
+                      contentDescription = null,
+                      tint = MaterialTheme.colorScheme.inversePrimary
+                  )
+              }*/
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(MaterialTheme.dimen.base_2x))
+                    .clickable {
+                        onClickMoreActionIcon()
+                    }
+                    .background(color = MaterialTheme.colorScheme.inversePrimary)
+
+            ) {
                 Icon(
-                    imageVector = Icons.Filled.Edit,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.inversePrimary
-                )
-            }
-            IconButton(onClick = onDeleteUser) {
-                Icon(
-                    imageVector = Icons.Filled.Delete,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.inversePrimary
+                    painter = if (isSystemInDarkTheme())
+                        painterResource(id = R.drawable.ic_baseline_clear_all_24)
+                    else painterResource(
+                        id = R.drawable.ic_base_white_theme
+                    ),
+                    contentDescription = "clear all icon"
                 )
             }
         }
@@ -96,14 +129,19 @@ fun CustomListItem(
 @Composable
 private fun CustomListItem() {
     Surface {
-        CustomListItem(modifier = Modifier, user = UserVo(
-            id = 0,
-            name = "Iran",
-            lastName = "5-0",
-            age = 2000,
-            date = "11.12.2022"
-        ), onEditUser = { }) {
+        CustomListItem(Modifier,
+            user = UserVo(
+                id = 0,
+                name = "Iran",
+                lastName = "5-0",
+                age = 2000,
+                date = "11.12.2022"
+            ),
+            onDeleteUser = {},
+            onEditUser = {},
+            onClickMoreActionIcon = {}
 
-        }
+        )
     }
 }
+

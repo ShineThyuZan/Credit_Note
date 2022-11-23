@@ -16,6 +16,8 @@
     <string name="OK">အတည်ပြုပါ။</string>
     <string name="date">ရက်စွဲ</string>
     <string name="date_less_current">ရက်စွဲသည် လက်ရှိအချိန်ထက် နည်းရမည်။</string>
+    <string name= "edit">မှတ်စုကို တည်းဖြတ်</string>
+    <string name="delete">မှတ်စုကို ဖျက်</string>
 
     <string name="password">စကားဝှက်</string>
 </resources>
