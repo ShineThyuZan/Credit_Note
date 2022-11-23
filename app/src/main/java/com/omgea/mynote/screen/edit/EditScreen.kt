@@ -1,13 +1,17 @@
 package com.omgea.mynote.screen.edit
 
+import android.app.DatePickerDialog
+import android.widget.DatePicker
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActionScope
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -19,7 +23,9 @@ import androidx.navigation.NavController
 import com.omgea.mynote.R
 import com.omgea.mynote.common.CommonTextField
 import com.omgea.mynote.ui.theme.MyNoteTheme
+import com.omgea.mynote.ui.theme.dimen
 import kotlinx.coroutines.flow.collectLatest
+import java.util.*
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -34,13 +40,41 @@ fun EditScreen(
     val nameState = state.userName
     val lastNameState = state.lastName
     val ageState = state.age
+    val date = state.date
     val keyboardController = LocalSoftwareKeyboardController.current
+    val context = LocalContext.current
+    val scaffoldState = rememberScaffoldState()
+
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+            viewModel.onAction(
+                EditAction.ChangeDob(
+                    dob = "$year-${month + 1}-$dayOfMonth"
+                )
+            )
+        },
+        Calendar.getInstance().get(Calendar.YEAR),
+        Calendar.getInstance().get(Calendar.MONTH),
+        Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+    )
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
-                is EditViewModel.UiEvent.SaveUser -> {
+                is EditViewModel.EditUIEvent.SaveUser -> {
                     navController.navigateUp()
+                }
+                EditViewModel.EditUIEvent.HideDobPicker -> {
+                    datePickerDialog.hide()
+                }
+                EditViewModel.EditUIEvent.ShowDobPicker -> {
+                    datePickerDialog.show()
+                }
+                is EditViewModel.EditUIEvent.ShowSnackBar -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.message
+                    )
                 }
             }
         }
@@ -81,7 +115,14 @@ fun EditScreen(
                 amountTextClear = {
                     viewModel.onAction(EditAction.EnterAmount(amountText = ""))
                 },
-                keyboard = { keyboardController?.hide() }
+                keyboard = { keyboardController?.hide() },
+                dateValue = date!!,
+                onDateChangeClicked = {
+                    viewModel.onAction(
+                        EditAction.ClickDobPicker
+                    )
+                },
+                errorDate = state.error.isErrorDob
             )
         },
         bottomBar = {
@@ -124,7 +165,12 @@ fun EditContent(
     amountTextChange: (String) -> Unit,
     amountTextClear: () -> Unit,
     keyboard: (KeyboardActionScope) -> Unit,
-) {
+
+    dateValue: String,
+    onDateChangeClicked: () -> Unit,
+    errorDate: Boolean,
+
+    ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -144,7 +190,7 @@ fun EditContent(
             keyboardAction = keyboard
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(MaterialTheme.dimen.base_2x))
 
         CommonTextField(
             placeholder = stringResource(id = R.string.description_place_holder),
@@ -157,7 +203,7 @@ fun EditContent(
             keyboardAction = keyboard
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(MaterialTheme.dimen.base_2x))
 
         CommonTextField(
             placeholder = stringResource(id = R.string.amount_placeholder),
@@ -169,6 +215,13 @@ fun EditContent(
             errorMessage = stringResource(id = R.string.error),
             keyboardType = KeyboardType.Number,
             keyboardAction = keyboard
+        )
+        Spacer(modifier = Modifier.height(MaterialTheme.dimen.base_2x))
+
+        DateSection(
+            dobValue = dateValue,
+            onDobChangeClicked = onDateChangeClicked,
+            isError = errorDate,
         )
     }
 }
@@ -214,7 +267,10 @@ fun PreviewAddEditUserContent() {
             descriptionTextChange = {},
             amountTextClear = {},
             amountTextChange = {},
-            keyboard = {}
+            keyboard = {},
+            dateValue = "",
+            onDateChangeClicked = {},
+            errorDate = false
         )
     }
 }

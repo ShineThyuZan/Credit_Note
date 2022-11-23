@@ -121,15 +121,15 @@ fun PasswordTextField(
                 isVisible = isError,
             )
         }*/
-
     }
 }
+
 
 @Composable
 fun VisibilityAnimator(
     modifier: Modifier = Modifier,
     isVisible: Boolean,
-
+    errorMessage: String,
 ) {
     AnimatedVisibility(
         visible = isVisible,
@@ -145,13 +145,12 @@ fun VisibilityAnimator(
                     horizontal = MaterialTheme.dimen.base_2x,
                     vertical = MaterialTheme.dimen.small
                 ),
-            text = "Wrong Password",
+            text = errorMessage,
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.error
         )
     }
 }
-
 @Composable
 @Preview(showBackground = true)
 fun PasswordTextFieldPreview() {

@@ -14,7 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.omgea.mynote.R
 import com.omgea.mynote.ui.theme.dimen
@@ -56,7 +55,10 @@ fun CommonDialog(
         text = {
             Column {
                 if (isErrorPassword)
-                    VisibilityAnimator(isVisible = true)
+                    VisibilityAnimator(
+                        isVisible = true,
+                        errorMessage = stringResource(id = R.string.error)
+                    )
                 else
                     Text(text = "", Modifier.height(MaterialTheme.dimen.base_4x))
                 PasswordTextField(
@@ -70,7 +72,7 @@ fun CommonDialog(
                     isError = isErrorPassword,
                     keyboardAction = keyboardAction,
 
-                )
+                    )
             }
         },
         dismissButton = {

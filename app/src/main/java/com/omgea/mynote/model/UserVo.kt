@@ -9,5 +9,6 @@ data class UserVo(
     @PrimaryKey(autoGenerate = true) val id: Int? = 0,
     val name: String = "",
     @ColumnInfo(name = "last_name") val lastName: String = "",
-    val age: Int = 0
+    val age: Int = 0,
+    val date: String = ""
 )

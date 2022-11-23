@@ -22,7 +22,7 @@ object AppModule {
         app,
         UserDatabase::class.java,
         DATABASE_NAME
-    ).build()
+    ).fallbackToDestructiveMigration().build()
 
     @Provides
     @Singleton

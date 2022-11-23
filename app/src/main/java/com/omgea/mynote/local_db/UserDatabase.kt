@@ -6,7 +6,7 @@ import com.omgea.mynote.model.UserVo
 
 @Database(
     entities = [UserVo::class],
-    version = 1,
+    version = 5,
     exportSchema = false
 )
 abstract class UserDatabase : RoomDatabase() {

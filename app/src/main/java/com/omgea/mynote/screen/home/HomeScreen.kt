@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,8 +23,8 @@ import com.omgea.mynote.common.ButtonType
 import com.omgea.mynote.common.CommonDialog
 import com.omgea.mynote.graph.Destination
 import com.omgea.mynote.model.UserVo
+import com.omgea.mynote.screen.home.components.CustomListItem
 import com.omgea.mynote.screen.home.components.HomeAction
-import com.omgea.mynote.screen.home.components.UserItem
 import com.omgea.mynote.ui.theme.MyNoteTheme
 import com.omgea.mynote.ui.theme.dimen
 import kotlinx.coroutines.flow.collectLatest
@@ -168,11 +170,13 @@ fun HomeContent(
     ) {
         LazyColumn {
             items(userVos) { user ->
-                UserItem(
-                    modifier = Modifier.padding(
-                        start = MaterialTheme.dimen.small,
-                        end = MaterialTheme.dimen.small
-                    ),
+                CustomListItem(
+                    modifier = Modifier
+                        .padding(
+                            start = MaterialTheme.dimen.small,
+                            end = MaterialTheme.dimen.small,
+                        )
+                        .clip(RectangleShape),
                     user = user,
                     onEditUser = { onEditUser(user) },
                     onDeleteUser = { onDeleteUser(user) }
