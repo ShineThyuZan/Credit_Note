@@ -1,6 +1,9 @@
-package com.omgea.mynote.screen.home.components
+package com.omgea.mynote.screen.home
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -103,24 +106,17 @@ fun CustomListItem(
                       tint = MaterialTheme.colorScheme.inversePrimary
                   )
               }*/
-            Box(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(MaterialTheme.dimen.base_2x))
-                    .clickable {
-                        onClickMoreActionIcon()
-                    }
-                    .background(color = MaterialTheme.colorScheme.inversePrimary)
-
-            ) {
-                Icon(
-                    painter = if (isSystemInDarkTheme())
-                        painterResource(id = R.drawable.ic_baseline_clear_all_24)
-                    else painterResource(
-                        id = R.drawable.ic_base_white_theme
-                    ),
-                    contentDescription = "clear all icon"
-                )
-            }
+            Icon(
+                modifier = Modifier.clickable {
+                    onClickMoreActionIcon()
+                },
+                painter = if (isSystemInDarkTheme())
+                    painterResource(id = R.drawable.ic_baseline_edit_note_24)
+                else painterResource(
+                    id = R.drawable.ic_baseline_edit_note
+                ),
+                contentDescription = "clear all icon",
+            )
         }
     }
 }

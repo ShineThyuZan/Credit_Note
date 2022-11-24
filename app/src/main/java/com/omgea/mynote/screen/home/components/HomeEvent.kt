@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.home
+package com.omgea.mynote.screen.home.components
 
 
 sealed class HomeEvent {

@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.edit
+package com.omgea.mynote.screen.edit.date
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*

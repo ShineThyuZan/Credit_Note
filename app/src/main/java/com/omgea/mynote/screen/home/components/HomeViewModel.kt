@@ -1,10 +1,9 @@
-package com.omgea.mynote.screen.home
+package com.omgea.mynote.screen.home.components
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.omgea.mynote.screen.home.components.HomeAction
 import com.omgea.mynote.use_cases.DeleteUserUseCase
 import com.omgea.mynote.use_cases.GetUserListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -88,7 +87,6 @@ class HomeViewModel @Inject constructor(
                 viewModelScope.launch {
                     setDialog(type = DialogType.EDIT)
                 }
-
             }
             HomeAction.ClickEditCancel -> {
                 _state.value = state.value.copy(
@@ -98,7 +96,6 @@ class HomeViewModel @Inject constructor(
                 viewModelScope.launch {
                     resetDialog()
                 }
-
             }
             is HomeAction.ClickEditOk -> {
                 if (state.value.passwordForEdit == "044288") {
@@ -111,7 +108,6 @@ class HomeViewModel @Inject constructor(
                         )
                         resetDialog()
                     }
-
                 } else {
                     _state.value = state.value.copy(
                         isError = true,

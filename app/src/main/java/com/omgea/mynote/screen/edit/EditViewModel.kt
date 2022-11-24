@@ -7,8 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.omgea.mynote.common.DateTimeUtil
 import com.omgea.mynote.model.UserVo
+import com.omgea.mynote.screen.edit.components.EditAction
+import com.omgea.mynote.screen.edit.components.UserInfoState
 import com.omgea.mynote.use_cases.GetUserUseCase
 import com.omgea.mynote.use_cases.InsertUserUseCase
+import com.omgea.mynote.use_cases.ValidateEditUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -98,9 +101,6 @@ class EditViewModel @Inject constructor(
                     )
                 }
             }
-            EditAction.ClickItemMore -> {
-
-            }
         }
     }
 
@@ -144,10 +144,8 @@ class EditViewModel @Inject constructor(
 
     sealed class EditUIEvent {
         object SaveUser : EditUIEvent()
-
         object ShowDobPicker : EditUIEvent()
         object HideDobPicker : EditUIEvent()
-
         data class ShowSnackBar(val message: String) : EditUIEvent()
     }
 }

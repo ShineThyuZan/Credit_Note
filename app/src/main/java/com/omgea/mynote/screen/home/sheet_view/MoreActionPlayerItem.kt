@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.home.components
+package com.omgea.mynote.screen.home.sheet_view
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

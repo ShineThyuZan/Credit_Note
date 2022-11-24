@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.home.components
+package com.omgea.mynote.screen.home
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border

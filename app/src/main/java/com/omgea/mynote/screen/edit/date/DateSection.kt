@@ -1,10 +1,11 @@
-package com.omgea.mynote.screen.edit
+package com.omgea.mynote.screen.edit.date
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.omgea.mynote.R
+import com.omgea.mynote.screen.edit.date.DateText
 
 @Composable
 fun DateSection(

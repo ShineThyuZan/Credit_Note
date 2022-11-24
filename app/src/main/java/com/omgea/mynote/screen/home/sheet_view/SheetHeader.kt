@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.home.components
+package com.omgea.mynote.screen.home.sheet_view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

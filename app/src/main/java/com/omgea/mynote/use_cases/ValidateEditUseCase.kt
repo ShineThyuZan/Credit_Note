@@ -1,6 +1,7 @@
-package com.omgea.mynote.screen.edit
+package com.omgea.mynote.use_cases
 
 import com.omgea.mynote.common.FormValidator
+import com.omgea.mynote.screen.edit.components.EditError
 import javax.inject.Inject
 
 

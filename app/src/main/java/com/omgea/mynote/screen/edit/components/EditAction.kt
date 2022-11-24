@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.edit
+package com.omgea.mynote.screen.edit.components
 
 sealed class EditAction {
     data class EnteredName(val nameText: String) : EditAction()
@@ -7,5 +7,4 @@ sealed class EditAction {
     data class ChangeDob(val dob: String) : EditAction()
     object ClickDobPicker : EditAction()
     object InsertUser : EditAction()
-    object ClickItemMore : EditAction()
 }
