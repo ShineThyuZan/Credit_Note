@@ -55,14 +55,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-       /* debug {
-            firebaseAppDistribution{
-                appId = "1:674751801115:android:c592d8e4bd03da61d1d5be"
-//                serviceCredentialsFile = "C:\\Users\\kyawlinnthant\\AndroidStudioProjects\\yk\\app\\service_account.json"
-//                releaseNotesFile = "hello"
-                groups="yk_qa-team"
-            }
-        }*/
     }
 }
 

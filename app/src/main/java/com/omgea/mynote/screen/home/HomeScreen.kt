@@ -1,5 +1,6 @@
 package com.omgea.mynote.screen.home
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -48,6 +49,12 @@ fun HomeScreen(
     val modalBottomSheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
+
+    BackHandler(enabled = modalBottomSheetState.isVisible) {
+        scope.launch {
+            modalBottomSheetState.hide()
+        }
+    }
 
     LaunchedEffect(key1 = true) {
         viewModel.homeEvent.collectLatest {
