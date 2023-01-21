@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.omgea.mynote.common.DateTimeUtil
 import com.omgea.mynote.model.UserVo
-import com.omgea.mynote.screen.edit.components.EditAction
-import com.omgea.mynote.screen.edit.components.UserInfoState
+import com.omgea.mynote.screen.edit.udf.EditAction
+import com.omgea.mynote.screen.edit.udf.UserInfoState
 import com.omgea.mynote.use_cases.GetUserUseCase
 import com.omgea.mynote.use_cases.InsertUserUseCase
 import com.omgea.mynote.use_cases.ValidateEditUseCase

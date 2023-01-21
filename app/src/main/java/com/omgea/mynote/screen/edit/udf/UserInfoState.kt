@@ -1,4 +1,5 @@
-package com.omgea.mynote.screen.edit.components
+package com.omgea.mynote.screen.edit.udf
+
 
 data class UserInfoState(
     val error: EditError = EditError(),

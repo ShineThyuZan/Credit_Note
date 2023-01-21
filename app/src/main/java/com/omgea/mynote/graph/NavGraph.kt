@@ -1,13 +1,10 @@
 package com.omgea.mynote.graph
 
 import android.annotation.SuppressLint
-import androidx.compose.runtime.Composable
 import androidx.navigation.*
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.omgea.mynote.screen.edit.EditScreen
-import com.omgea.mynote.screen.home.CreateNewPasswordScreen
+import com.omgea.mynote.screen.create_new_password.CreateNewPasswordScreen
 import com.omgea.mynote.screen.home.HomeScreen
 
 

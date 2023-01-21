@@ -1,7 +1,7 @@
 package com.omgea.mynote.use_cases
 
 import com.omgea.mynote.common.FormValidator
-import com.omgea.mynote.screen.edit.components.EditError
+import com.omgea.mynote.screen.edit.udf.EditError
 import javax.inject.Inject
 
 

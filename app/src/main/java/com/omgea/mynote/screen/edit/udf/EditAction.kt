@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.edit.components
+package com.omgea.mynote.screen.edit.udf
 
 sealed class EditAction {
     data class EnteredName(val nameText: String) : EditAction()

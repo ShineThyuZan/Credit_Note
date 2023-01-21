@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.home
+package com.omgea.mynote.screen.create_new_password
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.padding
@@ -43,6 +43,11 @@ fun CreateNewPasswordView(
     }
     val vm: HomeViewModel = hiltViewModel()
     val keyboardController = LocalSoftwareKeyboardController.current
+    val passwordLength = vm.state.value.actionPassword
+    var isActionLabelEnableState = true
+    if(passwordLength.isEmpty()){
+        isActionLabelEnableState = false
+    }
     Scaffold(
         topBar = {
             CommonTopBar(
@@ -56,6 +61,7 @@ fun CreateNewPasswordView(
                 onActionLabelClicked = {
                     navController.popBackStack()
                 },
+                isEnableActionLabel = isActionLabelEnableState,
             )
         },
         content = {

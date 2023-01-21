@@ -22,7 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.omgea.mynote.R
 import com.omgea.mynote.common.CommonTextField
-import com.omgea.mynote.screen.edit.components.EditAction
+import com.omgea.mynote.screen.edit.udf.EditAction
 import com.omgea.mynote.screen.edit.date.DateSection
 import com.omgea.mynote.ui.theme.MyNoteTheme
 import com.omgea.mynote.ui.theme.dimen
