@@ -11,11 +11,20 @@ sealed class HomeAction {
     data class ClickDelete(val user: UserVo) : HomeAction()
 
     data class ClickEdit(val user: UserVo) : HomeAction()
-    data class ClickEditOk(val user: UserVo) : HomeAction()
     object ClickEditCancel : HomeAction()
+    data class ClickEditOk(val user: UserVo) : HomeAction()
+
+    object ClickNewPassword : HomeAction()
+    object ClickNewPasswordCancel : HomeAction()
+    object ClickNewPasswordOk : HomeAction()
 
     data class ClickActionMore(val user: UserVo) : HomeAction()
 
     data class PasswordValueChange(val passwordValueChange: String) : HomeAction()
     data class PasswordEditValueChange(val passwordValueChange: String) : HomeAction()
+}
+
+sealed class CreatePasswordAction {
+    data class ClickUpdatePassword(val password: String) : CreatePasswordAction()
+
 }

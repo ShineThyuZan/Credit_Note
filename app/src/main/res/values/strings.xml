@@ -20,4 +20,6 @@
     <string name="delete">မှတ်စုကို ဖျက်</string>
 
     <string name="password">စကားဝှက်</string>
+    <string name="new_password">စကားဝှက် အသစ်</string>
+    <string name="default_password">စကားဝှက် "0000" ဖြင့် ဝင်ပါ။</string>
 </resources>

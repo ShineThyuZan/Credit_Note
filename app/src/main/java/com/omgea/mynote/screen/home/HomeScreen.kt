@@ -27,11 +27,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.omgea.mynote.R
-import com.omgea.mynote.common.ButtonType
-import com.omgea.mynote.common.CommonDialog
+import com.omgea.mynote.common.*
 import com.omgea.mynote.graph.Destination
 import com.omgea.mynote.model.UserVo
-import com.omgea.mynote.screen.home.components.*
+import com.omgea.mynote.screen.home.components.DialogType
+import com.omgea.mynote.screen.home.components.HomeAction
+import com.omgea.mynote.screen.home.components.HomeEvent
+import com.omgea.mynote.screen.home.components.HomeViewModel
 import com.omgea.mynote.screen.home.sheet_view.MoreActionSheetView
 import com.omgea.mynote.screen.home.sheet_view.MoreActionStatus
 import com.omgea.mynote.ui.theme.MyNoteTheme
@@ -39,7 +41,11 @@ import com.omgea.mynote.ui.theme.dimen
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class
+)
 @Composable
 fun HomeScreen(
     navController: NavController,
@@ -49,6 +55,7 @@ fun HomeScreen(
     val modalBottomSheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
+    val DEFAULT_PASSWORD = "0000"
 
     BackHandler(enabled = modalBottomSheetState.isVisible) {
         scope.launch {
@@ -67,6 +74,11 @@ fun HomeScreen(
                 HomeEvent.ShowMenu -> {
                     modalBottomSheetState.show()
                 }
+                HomeEvent.NavigateToCreatePassword -> {
+                    navController.navigate(
+                        route = Destination.CreateNewPassword.route
+                    )
+                }
             }
         }
     }
@@ -77,7 +89,7 @@ fun HomeScreen(
             DialogType.EDIT -> {
                 CommonDialog(
                     modifier = Modifier.fillMaxWidth(),
-                    passwordValue = state.passwordForEdit,
+                    passwordValue = state.password,
                     dismissButtonLabel = stringResource(id = R.string.cancel),
                     dismissAction = {
                         viewModel.onAction(
@@ -98,13 +110,14 @@ fun HomeScreen(
                         )
                     },
                     isErrorPassword = state.isError,
-                    keyboardAction = {}
+                    keyboardAction = {},
+                    title = stringResource(id = R.string.edit)
                 )
             }
             DialogType.DELETE -> {
                 CommonDialog(
                     modifier = Modifier.fillMaxWidth(),
-                    passwordValue = state.passwordForDelete,
+                    passwordValue = state.password,
                     dismissButtonLabel = stringResource(id = R.string.cancel),
                     dismissAction = {
                         viewModel.onAction(
@@ -125,7 +138,43 @@ fun HomeScreen(
                         )
                     },
                     isErrorPassword = state.isError,
-                    keyboardAction = {}
+                    keyboardAction = {},
+                    title = stringResource(id = R.string.delete)
+                )
+            }
+            DialogType.NEW_PASSWORD -> {
+                val defaultPassword: String = stringResource(id = R.string.default_password)
+                val currentPassword: String = stringResource(id = R.string.password)
+                val title = if (state.passwordFormDs == DEFAULT_PASSWORD)
+                    defaultPassword
+                else
+                    currentPassword
+
+                // state.password is value to operation
+                CommonDialog(
+                    modifier = Modifier.fillMaxWidth(),
+                    passwordValue = state.password,
+                    dismissButtonLabel = stringResource(id = R.string.cancel),
+                    dismissAction = {
+                        viewModel.onAction(
+                            HomeAction.ClickNewPasswordCancel
+                        )
+                    },
+                    confirmButtonLabel = stringResource(id = R.string.OK),
+                    confirmButtonType = ButtonType.SOLID_BUTTON,
+                    confirmButtonAction = {
+                        viewModel.onAction(HomeAction.ClickNewPasswordOk)
+                    },
+                    onPasswordValueChanged = {
+                        viewModel.onAction(
+                            HomeAction.PasswordValueChange(
+                                passwordValueChange = it
+                            )
+                        )
+                    },
+                    isErrorPassword = state.isError,
+                    keyboardAction = {},
+                    title = title
                 )
             }
         }
@@ -169,7 +218,14 @@ fun HomeScreen(
         Scaffold(
             modifier = Modifier,
             topBar = {
-                HomeTopBar()
+                CommonTopBar(
+                    topBarActionType = TopBarType.NoAction,
+                    actionLabel = stringResource(id = R.string.new_password),
+                    onActionLabelClicked = {
+                        viewModel.onAction(HomeAction.ClickNewPassword)
+                    },
+                    title = stringResource(id = R.string.app_name)
+                )
             },
             floatingActionButton = {
                 HomeFab(
@@ -217,7 +273,8 @@ fun HomeTopBar(
                     .wrapContentSize(Alignment.Center)
             )
         },
-    )
+
+        )
 }
 
 @Composable

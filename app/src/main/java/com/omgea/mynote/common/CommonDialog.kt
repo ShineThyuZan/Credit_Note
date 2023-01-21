@@ -3,6 +3,7 @@ package com.omgea.mynote.common
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
@@ -10,10 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import com.omgea.mynote.R
 import com.omgea.mynote.ui.theme.dimen
@@ -27,7 +34,7 @@ enum class ButtonType {
 @Composable
 fun CommonDialog(
     modifier: Modifier,
-
+    title : String = "",
     // password
     passwordValue: String,
     onPasswordValueChanged: (String) -> Unit,
@@ -95,6 +102,23 @@ fun CommonDialog(
                 }
             }
         },
+        title = {
+            val offset = Offset(5.0f, 10.0f)
+            Text(
+                textAlign = TextAlign.Center,
+                modifier = Modifier.width(300.dp),
+                text = title,
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    shadow = Shadow(
+                        color = MaterialTheme.colorScheme.secondaryContainer,
+                        offset = offset,
+                        blurRadius = 3f
+                    )
+                )
+            )
+        }
+
     )
 
 }

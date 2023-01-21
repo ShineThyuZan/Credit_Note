@@ -4,12 +4,18 @@ import android.app.Application
 import androidx.room.Room
 import com.omgea.mynote.constant.DATABASE_NAME
 import com.omgea.mynote.local_db.UserDatabase
+import com.omgea.mynote.repo_impl.PasswordDsRepositoryImpl
 import com.omgea.mynote.repo_impl.UserRepositoryImpl
+import com.omgea.mynote.repository.PasswordDsRepository
 import com.omgea.mynote.repository.UserRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -29,4 +35,22 @@ object AppModule {
     fun provideRepository(db: UserDatabase): UserRepository {
         return UserRepositoryImpl(db.userDao)
     }
+    @Provides
+    @PasswordIo
+    fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 }
+@Module
+@InstallIn(SingletonComponent::class)
+interface PasswordRepository{
+   /* @Singleton
+    @Binds
+    fun bindsAuthApiRepository(authApiRepo: AuthApiRepositoryImpl): AuthApiRepository
+*/
+    @Singleton
+    @Binds
+    fun bindsAuthDsRepository(authDsRepo: PasswordDsRepositoryImpl): PasswordDsRepository
+}
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+annotation class PasswordIo

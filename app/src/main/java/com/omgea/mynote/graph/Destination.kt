@@ -15,4 +15,5 @@ sealed class Destination(
             return "edit?userId=$userId"
         }
     }
+    object CreateNewPassword : Destination("create_password")
 }

@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.omgea.mynote.screen.edit.EditScreen
+import com.omgea.mynote.screen.home.CreateNewPasswordScreen
 import com.omgea.mynote.screen.home.HomeScreen
 
 
@@ -14,7 +15,6 @@ import com.omgea.mynote.screen.home.HomeScreen
 fun NavGraphBuilder.navGraph(
     navController: NavController
 ) {
-
     navigation(
         startDestination = Destination.Home.route,
         route = Routes.HOME
@@ -34,6 +34,9 @@ fun NavGraphBuilder.navGraph(
             )
         ) {
             EditScreen(navController = navController)
+        }
+        composable(route = Destination.CreateNewPassword.route) {
+            CreateNewPasswordScreen(navController = navController)
         }
     }
 }

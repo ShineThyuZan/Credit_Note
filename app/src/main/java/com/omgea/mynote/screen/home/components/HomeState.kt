@@ -15,8 +15,11 @@ data class HomeState(
     val clearUser: UserVo = UserVo(),
     val editUser: UserVo = UserVo(),
 
-    val passwordForDelete: String = "",
-    val passwordForEdit: String = "",
+    // action pw to save
+    val actionPassword : String = "",
+    val password : String = "",
+    val passwordFormDs : String = "",
+
     val isError: Boolean = false,
 )
 
@@ -24,4 +27,5 @@ enum class DialogType {
     NOTHING,
     EDIT,
     DELETE,
+    NEW_PASSWORD,
 }

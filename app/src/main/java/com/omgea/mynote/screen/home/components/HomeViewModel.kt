@@ -4,20 +4,21 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.omgea.mynote.use_cases.PasswordPullUseCase
+import com.omgea.mynote.use_cases.PasswordPutUseCase
 import com.omgea.mynote.use_cases.DeleteUserUseCase
 import com.omgea.mynote.use_cases.GetUserListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val deleteUserUseCase: DeleteUserUseCase,
-    getUserListUseCase: GetUserListUseCase
+    getUserListUseCase: GetUserListUseCase,
+    private val passwordPutUseCase: PasswordPutUseCase,
+    private val passwordPullUseCase: PasswordPullUseCase,
 ) : ViewModel() {
 
     private val _state = mutableStateOf(HomeState())
@@ -29,9 +30,11 @@ class HomeViewModel @Inject constructor(
     init {
         getUserListUseCase().onEach { usersList ->
             _state.value = state.value.copy(
-                usersList = usersList
+                usersList = usersList.asReversed()
             )
         }.launchIn(viewModelScope)
+
+        getPasswordFormDataStore()
     }
 
     fun onAction(action: HomeAction) {
@@ -39,7 +42,7 @@ class HomeViewModel @Inject constructor(
             is HomeAction.ClickDelete -> {
                 _state.value = state.value.copy(
                     clearUser = action.user,
-                    passwordForDelete = "",
+                    password = "",
                     isError = false,
                 )
                 viewModelScope.launch {
@@ -48,7 +51,6 @@ class HomeViewModel @Inject constructor(
             }
             HomeAction.ClickDeleteCancel -> {
                 _state.value = state.value.copy(
-                    passwordForDelete = "",
                     isError = false
                 )
                 viewModelScope.launch {
@@ -56,9 +58,10 @@ class HomeViewModel @Inject constructor(
                 }
             }
             is HomeAction.ClickDeleteOk -> {
-                if (state.value.passwordForDelete == "044299") {
+                if (state.value.password == state.value.passwordFormDs) {
                     viewModelScope.launch {
                         _state.value = state.value.copy(
+                            password = "",
                             isError = false,
                         )
                         resetDialog()
@@ -66,13 +69,14 @@ class HomeViewModel @Inject constructor(
                     }
                 } else {
                     _state.value = state.value.copy(
+                        password = "",
                         isError = true,
                     )
                 }
             }
             is HomeAction.PasswordValueChange -> {
                 _state.value = state.value.copy(
-                    passwordForDelete = action.passwordValueChange
+                    password = action.passwordValueChange
                 )
                 /*    error = loginState.value.error.copy(
                         errorPassword = false
@@ -81,7 +85,7 @@ class HomeViewModel @Inject constructor(
             is HomeAction.ClickEdit -> {
                 _state.value = state.value.copy(
                     editUser = action.user,
-                    passwordForEdit = "",
+                    password = "",
                     isError = false,
                 )
                 viewModelScope.launch {
@@ -90,7 +94,7 @@ class HomeViewModel @Inject constructor(
             }
             HomeAction.ClickEditCancel -> {
                 _state.value = state.value.copy(
-                    passwordForEdit = "",
+                    password = "",
                     isError = false
                 )
                 viewModelScope.launch {
@@ -98,10 +102,11 @@ class HomeViewModel @Inject constructor(
                 }
             }
             is HomeAction.ClickEditOk -> {
-                if (state.value.passwordForEdit == "044288") {
+                if (state.value.password == state.value.actionPassword) {
                     viewModelScope.launch {
                         _state.value = state.value.copy(
                             isError = false,
+                            password = "",
                         )
                         _homeEvent.emit(
                             HomeEvent.NavigateToEdit(userId = action.user.id!!)
@@ -116,7 +121,7 @@ class HomeViewModel @Inject constructor(
             }
             is HomeAction.PasswordEditValueChange -> {
                 _state.value = state.value.copy(
-                    passwordForEdit = action.passwordValueChange
+                    password = action.passwordValueChange
                 )
             }
             is HomeAction.ClickActionMore -> {
@@ -129,6 +134,65 @@ class HomeViewModel @Inject constructor(
                         HomeEvent.ShowMenu
                     )
                 }
+            }
+            HomeAction.ClickNewPassword -> {
+                viewModelScope.launch {
+                    setDialog(type = DialogType.NEW_PASSWORD)
+                }
+            }
+            HomeAction.ClickNewPasswordCancel -> {
+                _state.value = state.value.copy(
+                    password = "",
+                    isError = false
+                )
+                viewModelScope.launch {
+                    resetDialog()
+                }
+            }
+            is HomeAction.ClickNewPasswordOk -> {
+                if (state.value.password == state.value.passwordFormDs) {
+                    _state.value = state.value.copy(
+                        password = "",
+                        isError = false
+                    )
+                    viewModelScope.launch {
+                      resetDialog()
+                        _homeEvent.emit(
+                            HomeEvent.NavigateToCreatePassword
+                        )
+                    }
+                } else {
+                    _state.value = state.value.copy(
+                        isError = true
+                    )
+                }
+            }
+        }
+    }
+
+    fun onCreatePasswordAction(action: CreatePasswordAction) {
+        when (action) {
+            is CreatePasswordAction.ClickUpdatePassword -> {
+                _state.value = state.value.copy(
+                    actionPassword = action.password
+                )
+                // put password to DataStore
+                viewModelScope.launch {
+                    passwordPutUseCase.invoke(state.value.actionPassword)
+                }
+            }
+        }
+    }
+
+    // pull password form data store
+    private fun getPasswordFormDataStore() {
+        viewModelScope.launch {
+
+            passwordPullUseCase.invoke()::collectLatest{ passwordFormDs ->
+                _state.value = state.value.copy(
+                    passwordFormDs = passwordFormDs
+                )
+
             }
         }
     }
