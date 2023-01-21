@@ -74,12 +74,10 @@ fun CreateNewPasswordView(
                     vm.onCreatePasswordAction(
                         CreatePasswordAction.ClickUpdatePassword(password = changePhoneValue.trim())
                     )
-
                 },
                 phonePlaceHolder = stringResource(id = com.omgea.mynote.R.string.new_password),
                 phoneImeAction = ImeAction.Done,
                 onPhoneValueCleared = {
-
                     vm.onCreatePasswordAction(
                         CreatePasswordAction.ClickUpdatePassword(password = "")
                     )

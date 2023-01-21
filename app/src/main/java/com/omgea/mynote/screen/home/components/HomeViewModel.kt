@@ -102,7 +102,7 @@ class HomeViewModel @Inject constructor(
                 }
             }
             is HomeAction.ClickEditOk -> {
-                if (state.value.password == state.value.actionPassword) {
+                if (state.value.password == state.value.passwordFormDs) {
                     viewModelScope.launch {
                         _state.value = state.value.copy(
                             isError = false,
