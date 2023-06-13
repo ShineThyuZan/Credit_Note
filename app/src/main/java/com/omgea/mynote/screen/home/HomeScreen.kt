@@ -1,39 +1,40 @@
 package com.omgea.mynote.screen.home
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.rememberModalBottomSheetState
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.omgea.mynote.R
-import com.omgea.mynote.common.*
+import com.omgea.mynote.common.ButtonType
+import com.omgea.mynote.common.CommonDialog
+import com.omgea.mynote.common.CommonTopBar
+import com.omgea.mynote.common.TopBarType
 import com.omgea.mynote.graph.Destination
-import com.omgea.mynote.model.UserVo
 import com.omgea.mynote.screen.home.components.DialogType
 import com.omgea.mynote.screen.home.components.HomeAction
 import com.omgea.mynote.screen.home.components.HomeEvent
 import com.omgea.mynote.screen.home.components.HomeViewModel
+import com.omgea.mynote.screen.home.sheet_view.HomeTopBar
 import com.omgea.mynote.screen.home.sheet_view.MoreActionSheetView
 import com.omgea.mynote.screen.home.sheet_view.MoreActionStatus
 import com.omgea.mynote.ui.theme.MyNoteTheme
@@ -56,13 +57,14 @@ fun HomeScreen(
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val DEFAULT_PASSWORD = "0000"
+    val listState = rememberLazyListState()
+    val isScrolled = remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
 
     BackHandler(enabled = modalBottomSheetState.isVisible) {
         scope.launch {
             modalBottomSheetState.hide()
         }
     }
-
     LaunchedEffect(key1 = true) {
         viewModel.homeEvent.collectLatest {
             when (it) {
@@ -71,9 +73,11 @@ fun HomeScreen(
                         route = Destination.Edit.passId(it.userId)
                     )
                 }
+
                 HomeEvent.ShowMenu -> {
                     modalBottomSheetState.show()
                 }
+
                 HomeEvent.NavigateToCreatePassword -> {
                     navController.navigate(
                         route = Destination.CreateNewPassword.route
@@ -114,6 +118,7 @@ fun HomeScreen(
                     title = stringResource(id = R.string.edit)
                 )
             }
+
             DialogType.DELETE -> {
                 CommonDialog(
                     modifier = Modifier.fillMaxWidth(),
@@ -142,6 +147,7 @@ fun HomeScreen(
                     title = stringResource(id = R.string.delete)
                 )
             }
+
             DialogType.NEW_PASSWORD -> {
                 val defaultPassword: String = stringResource(id = R.string.default_password)
                 val currentPassword: String = stringResource(id = R.string.password)
@@ -195,6 +201,7 @@ fun HomeScreen(
                             )
                             /* download()*/
                         }
+
                         MoreActionStatus.DELETE.index -> {
                             scope.launch {
                                 modalBottomSheetState.hide()
@@ -228,13 +235,16 @@ fun HomeScreen(
                 )
             },
             floatingActionButton = {
-                HomeFab(
-                    onFabClicked = { navController.navigate(Destination.Edit.route) }
-                )
+                if (isScrolled.value) {
+
+                }else{
+                    HomeFab(
+                        onFabClicked = { navController.navigate(Destination.Edit.route) }
+                    )
+                }
             },
             content = { innerPadding ->
                 HomeContent(
-                    modifier = Modifier.padding(innerPadding),
                     onDeleteUser = {
                         viewModel.onAction(
                             HomeAction.ClickDelete(user = it)
@@ -251,79 +261,11 @@ fun HomeScreen(
                         viewModel.onAction(
                             HomeAction.ClickActionMore(userVo)
                         )
-                    }
+                    },
+                    listState = listState,
+                    scaffoldPadding = innerPadding
                 )
             }
-        )
-    }
-}
-
-@Composable
-fun HomeTopBar(
-    modifier: Modifier = Modifier
-) {
-    SmallTopAppBar(
-        title = {
-            Text(
-                text = stringResource(id = R.string.note_list),
-                textAlign = TextAlign.Center,
-                modifier = modifier
-                    .fillMaxSize()
-                    .size(MaterialTheme.dimen.base)
-                    .wrapContentSize(Alignment.Center)
-            )
-        },
-
-        )
-}
-
-@Composable
-fun HomeContent(
-    modifier: Modifier = Modifier,
-    onDeleteUser: (userVo: UserVo) -> Unit,
-    onEditUser: (userVo: UserVo) -> Unit,
-    userVos: List<UserVo> = emptyList(),
-    onClickMoreAction: (userVo: UserVo) -> Unit,
-) {
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.surface,
-    ) {
-        LazyColumn {
-            items(userVos) { user ->
-                CustomListItem(
-                    modifier = Modifier
-                        .padding(
-                            start = MaterialTheme.dimen.small,
-                            end = MaterialTheme.dimen.small,
-                        )
-                        .clip(RectangleShape),
-                    user = user,
-                    onEditUser = { onEditUser(user) },
-                    onDeleteUser = { onDeleteUser(user) },
-                    onClickMoreActionIcon = {
-                        onClickMoreAction(user)
-                    }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun HomeFab(
-    modifier: Modifier = Modifier,
-    onFabClicked: () -> Unit = {}
-) {
-    FloatingActionButton(
-        onClick = onFabClicked,
-        modifier = modifier
-            .height(52.dp)
-            .widthIn(min = 52.dp),
-    ) {
-        Icon(
-            imageVector = Icons.Outlined.Add,
-            contentDescription = stringResource(id = R.string.add_new_note)
         )
     }
 }
@@ -332,9 +274,16 @@ fun HomeFab(
 @Composable
 fun PreviewUserContent() {
     MyNoteTheme(darkTheme = false) {
-        HomeContent(onDeleteUser = {},
+        HomeContent(
+            onDeleteUser = {},
             onEditUser = {},
-            onClickMoreAction = {})
+            onClickMoreAction = {},
+            listState = LazyListState(
+                firstVisibleItemIndex = 0,
+                firstVisibleItemScrollOffset = 1
+            ),
+            scaffoldPadding = PaddingValues()
+        )
     }
 }
 

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">AK စာရင်း</string>
-    <string name="note_list">AK ( စာရင်း )</string>
-    <string name="add_new_note">မှတ်စုအသစ် ထည့်ပါ...</string>
+    <string name="app_name">စာရင်း မှတ်မယ်</string>
+    <string name="note_list">စာရင်း မှတ်မယ် </string>
+    <string name="add_new_note">မှတ်စုအသစ် ထည့်ပါ</string>
 
     <string name="name">နာမည်</string>
     <string name="name_place_holder">နာမည် ထည့်သွင်းပါ။</string>
