@@ -17,8 +17,8 @@
 + Dagger - Hilt
 
 ## Show Sample Screen 
-![Home Screen](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/home_scn.jpg?raw=true){:width="150px" height="200px"}
-![Create Note](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/create_note.jpg?raw=true){:width="150px" height="200px"}
-![Note Edit Actions](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_actions.jpg?raw=true){:width="150px" height="200px"}
-![Edit Screen](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_scn.jpg?raw=true){:width="150px" height="200px"}
+![Home Screen](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/home_scn.jpg?raw=true){:width="40px" height="60px"}
+![Create Note](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/create_note.jpg?raw=true){:width="40px" height="60px"}
+![Note Edit Actions](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_actions.jpg?raw=true){:width="40px" height="60px"}
+![Edit Screen](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_scn.jpg?raw=true){:width="40px" height="60px"}
 
