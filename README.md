@@ -17,6 +17,7 @@
 + Dagger - Hilt
 
 ## Show Sample Screen 
+<img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/home_scn.jpg)" alt="Dashboard Screenshot" width="80">
 ![Home Screen](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/home_scn.jpg?raw=true){:width="40px" height="60px"}
 ![Create Note](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/create_note.jpg?raw=true){:width="40px" height="60px"}
 ![Note Edit Actions](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_actions.jpg?raw=true){:width="40px" height="60px"}
