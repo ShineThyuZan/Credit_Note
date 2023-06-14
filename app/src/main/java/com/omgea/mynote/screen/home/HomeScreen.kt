@@ -42,7 +42,6 @@ import com.omgea.mynote.ui.theme.dimen
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 @OptIn(
     ExperimentalMaterial3Api::class,
     ExperimentalMaterialApi::class
@@ -237,7 +236,7 @@ fun HomeScreen(
             floatingActionButton = {
                 if (isScrolled.value) {
 
-                }else{
+                } else {
                     HomeFab(
                         onFabClicked = { navController.navigate(Destination.Edit.route) }
                     )

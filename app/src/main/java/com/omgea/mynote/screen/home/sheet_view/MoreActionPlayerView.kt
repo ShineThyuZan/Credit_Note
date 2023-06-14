@@ -34,7 +34,6 @@ fun MoreActionSheetView(
 private fun SheetPreview() {
     Surface {
         MoreActionSheetView(
-
             onItemClick = {}
         )
     }

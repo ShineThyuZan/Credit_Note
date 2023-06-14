@@ -3,7 +3,7 @@ package com.omgea.mynote.graph
 import android.annotation.SuppressLint
 import androidx.navigation.*
 import androidx.navigation.compose.composable
-import com.omgea.mynote.screen.edit.EditScreen
+import com.omgea.mynote.screen.edit.NoteEditScreen
 import com.omgea.mynote.screen.create_new_password.CreateNewPasswordScreen
 import com.omgea.mynote.screen.home.HomeScreen
 
@@ -30,7 +30,7 @@ fun NavGraphBuilder.navGraph(
                 }
             )
         ) {
-            EditScreen(navController = navController)
+            NoteEditScreen(navController = navController)
         }
         composable(route = Destination.CreateNewPassword.route) {
             CreateNewPasswordScreen(navController = navController)

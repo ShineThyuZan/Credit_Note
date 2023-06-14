@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-
 @Composable
 fun EditTopBar(topAppBarText: String) {
     SmallTopAppBar(

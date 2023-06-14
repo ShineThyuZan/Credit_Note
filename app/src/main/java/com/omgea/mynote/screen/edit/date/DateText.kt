@@ -18,7 +18,6 @@ import com.omgea.mynote.ui.theme.dimen
 import com.omgea.mynote.R
 import com.omgea.mynote.common.VisibilityAnimator
 
-
 @Composable
 fun DateText(
     modifier: Modifier = Modifier,

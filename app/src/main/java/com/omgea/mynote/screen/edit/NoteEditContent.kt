@@ -17,9 +17,8 @@ import com.omgea.mynote.common.CommonTextField
 import com.omgea.mynote.screen.edit.date.DateSection
 import com.omgea.mynote.ui.theme.dimen
 
-
 @Composable
-fun EditContent(
+fun NoteEditContent(
     name: String,
     nameTextChange: (String) -> Unit,
     nameTextClear: () -> Unit,

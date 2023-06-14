@@ -2,39 +2,31 @@ package com.omgea.mynote.screen.edit
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardActionScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.omgea.mynote.R
-import com.omgea.mynote.common.CommonTextField
 import com.omgea.mynote.screen.edit.udf.EditAction
-import com.omgea.mynote.screen.edit.date.DateSection
 import com.omgea.mynote.ui.theme.MyNoteTheme
-import com.omgea.mynote.ui.theme.dimen
 import kotlinx.coroutines.flow.collectLatest
-import java.util.*
-
+import java.util.Calendar
 @OptIn(
     ExperimentalMaterial3Api::class,
     ExperimentalComposeUiApi::class
 )
 @Composable
-fun EditScreen(
+fun NoteEditScreen(
     navController: NavController,
     viewModel: EditViewModel = hiltViewModel()
 ) {
@@ -67,12 +59,15 @@ fun EditScreen(
                 is EditViewModel.EditUIEvent.SaveUser -> {
                     navController.navigateUp()
                 }
+
                 EditViewModel.EditUIEvent.HideDobPicker -> {
                     datePickerDialog.hide()
                 }
+
                 EditViewModel.EditUIEvent.ShowDobPicker -> {
                     datePickerDialog.show()
                 }
+
                 is EditViewModel.EditUIEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message
@@ -90,8 +85,8 @@ fun EditScreen(
         },
         content = {
             Modifier.padding(it)
-            EditContent(
-                /* name */
+            NoteEditContent(
+                /** Name */
                 name = nameState!!,
                 nameTextChange = { name ->
                     viewModel.onAction(EditAction.EnteredName(nameText = name))
@@ -100,7 +95,7 @@ fun EditScreen(
                     viewModel.onAction(EditAction.EnteredName(nameText = ""))
                 },
 
-                /* description */
+                /** Description */
                 description = lastNameState!!,
                 descriptionTextChange = { description ->
                     viewModel.onAction(EditAction.EnteredDescription(descText = description))
@@ -109,7 +104,7 @@ fun EditScreen(
                     viewModel.onAction(EditAction.EnteredDescription(descText = ""))
                 },
 
-                /* amount  */
+                /** Amount  */
                 amount = ageState!!,
                 amountTextChange = { amount ->
                     viewModel.onAction(EditAction.EnterAmount(amountText = amount))
@@ -153,7 +148,7 @@ fun PreviewAddEditUserTopBar() {
 @Composable
 fun PreviewAddEditUserContent() {
     MyNoteTheme {
-        EditContent(
+        NoteEditContent(
             name = "Ada",
             description = "Smith",
             amount = "20",
