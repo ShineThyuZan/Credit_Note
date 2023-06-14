@@ -22,5 +22,6 @@
 <img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/create_note.jpg" alt="Create Note Screenshot" width="200" height="350">
 <img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_actions.jpg" alt="Note Edit Actions Screenshot" width="200" height="350">
 <img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_scn.jpg" alt="Edit Screen Screenshot" width="200" height="350">
+<img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/input_data.jpg" alt="Input Information Screenshot" width="200" height="350">
 </div>
 
