@@ -17,9 +17,9 @@
 + Dagger - Hilt
 
 ## Show Sample Screen 
-<img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/home_scn.jpg" alt="Dashboard Screenshot" width="80">
-![Home Screen](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/home_scn.jpg?raw=true){:width="40px" height="60px"}
-![Create Note](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/create_note.jpg?raw=true){:width="40px" height="60px"}
-![Note Edit Actions](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_actions.jpg?raw=true){:width="40px" height="60px"}
-![Edit Screen](https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_scn.jpg?raw=true){:width="40px" height="60px"}
+<img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/home_scn.jpg" alt="Home Screenshot" width="150" height="200">
+<img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/create_note.jpg" alt="Create Note Screenshot" width="150" height="200">
+<img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_actions.jpg" alt="Note Edit Actions Screenshot" width="150" height="200">
+<img src="https://github.com/ShineThyuZan/Credit_Note/blob/master/app/src/main/res/drawable-v24/edit_scn.jpg" alt="Edit Screen Screenshot" width="150" height="200">
+
 
