@@ -35,7 +35,6 @@ android {
         }
     }
 
-
     //BUILD VARIANTS
     defaultConfig {
         applicationId "com.omgea.mynote"

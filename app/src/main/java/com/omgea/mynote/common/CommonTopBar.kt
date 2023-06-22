@@ -28,7 +28,6 @@ sealed interface TopBarType {
     object ThreeAction : TopBarType
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CommonTopBar(
     modifier: Modifier = Modifier,

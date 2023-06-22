@@ -17,7 +17,6 @@ class PasswordDsRepositoryImpl @Inject constructor(
             pwPref.putPassword(password = password)
         }
     }
-
     override suspend fun pullPassword(): Flow<String> {
         return pwPref.pullPassword().flowOn(context = io)
     }
