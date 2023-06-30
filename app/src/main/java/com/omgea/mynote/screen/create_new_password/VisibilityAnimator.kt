@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.home.components
+package com.omgea.mynote.screen.create_new_password
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween

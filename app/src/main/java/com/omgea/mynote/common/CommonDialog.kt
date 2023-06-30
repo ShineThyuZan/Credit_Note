@@ -24,13 +24,11 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import com.omgea.mynote.R
 import com.omgea.mynote.ui.theme.dimen
-
 enum class ButtonType {
     SOLID_BUTTON,
     TONAL_BUTTON,
     TEXT_BUTTON
 }
-
 @Composable
 fun CommonDialog(
     modifier: Modifier,

@@ -17,12 +17,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.omgea.mynote.R
 import com.omgea.mynote.ui.theme.dimen
-
 enum class MoreActionStatus(val index: Int) {
     EDIT_NOTE(0),
     DELETE(1),
 }
-
 @Composable
 fun MoreActionSheetItem(onItemClick: (moreActionStatus: Int) -> Unit) {
 

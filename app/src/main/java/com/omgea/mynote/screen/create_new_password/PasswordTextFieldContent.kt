@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.home.components
+package com.omgea.mynote.screen.create_new_password
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActionScope

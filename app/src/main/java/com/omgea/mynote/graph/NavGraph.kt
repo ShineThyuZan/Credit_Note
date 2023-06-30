@@ -6,8 +6,6 @@ import androidx.navigation.compose.composable
 import com.omgea.mynote.screen.edit.NoteEditScreen
 import com.omgea.mynote.screen.create_new_password.CreateNewPasswordScreen
 import com.omgea.mynote.screen.home.HomeScreen
-
-
 @SuppressLint("UnrememberedGetBackStackEntry")
 fun NavGraphBuilder.navGraph(
     navController: NavController

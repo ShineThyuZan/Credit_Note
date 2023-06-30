@@ -4,7 +4,6 @@ object Routes {
     const val ROOT_ROUTE = "root"
     const val HOME = "notes"
 }
-
 sealed class Destination(
     val route: String
 ) {

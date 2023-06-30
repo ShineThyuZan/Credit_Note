@@ -19,7 +19,6 @@ import com.omgea.mynote.R
 import com.omgea.mynote.model.UserVo
 import com.omgea.mynote.ui.theme.MyNoteTheme
 import com.omgea.mynote.ui.theme.dimen
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserItem(

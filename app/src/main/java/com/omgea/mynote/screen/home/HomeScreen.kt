@@ -230,7 +230,7 @@ fun HomeScreen(
                     onActionLabelClicked = {
                         viewModel.onAction(HomeAction.ClickNewPassword)
                     },
-                    title = stringResource(id = R.string.app_name)
+                    title = stringResource(id = R.string.note_list)
                 )
             },
             floatingActionButton = {

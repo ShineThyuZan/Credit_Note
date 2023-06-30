@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 @HiltViewModel
 class EditViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
@@ -32,7 +31,6 @@ class EditViewModel @Inject constructor(
     val eventFlow = _eventFlow.asSharedFlow()
 
     private var currentUserId: Int? = null
-
     init {
         savedStateHandle.get<Int>("userId")?.let { userId ->
             if (userId != -1) {

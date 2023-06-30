@@ -15,7 +15,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import com.omgea.mynote.common.CustomListItem
 import com.omgea.mynote.model.UserVo
 import com.omgea.mynote.ui.theme.dimen
-
 @Composable
 fun HomeContent(
     modifier: Modifier = Modifier,

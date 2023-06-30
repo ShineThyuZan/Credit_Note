@@ -10,10 +10,8 @@ import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import javax.inject.Inject
-
 @HiltAndroidApp
 class MyNoteApp : MultiDexApplication(), Configuration.Provider {
-
     companion object {
         const val UPLOAD_CHANNEL = "upload.channel"
         const val CHANNEL_NAME = "upload.photo.files"

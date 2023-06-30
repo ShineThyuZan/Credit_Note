@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.omgea.mynote.R
-
 @Composable
 fun DateSection(
     modifier: Modifier = Modifier,

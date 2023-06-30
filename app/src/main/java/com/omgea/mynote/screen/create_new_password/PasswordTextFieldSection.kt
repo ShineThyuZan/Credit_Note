@@ -1,4 +1,4 @@
-package com.omgea.mynote.screen.home.components
+package com.omgea.mynote.screen.create_new_password
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.omgea.mynote.R
 import com.omgea.mynote.common.HorizontalSpacerBase
 import com.omgea.mynote.ui.theme.dimen
-
 
 @Composable
 fun PasswordTextFieldSection(

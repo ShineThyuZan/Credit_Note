@@ -13,7 +13,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.omgea.mynote.R
 import com.omgea.mynote.ui.theme.dimen
-
 @Composable
 fun HomeTopBar(
     modifier: Modifier = Modifier

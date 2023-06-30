@@ -5,8 +5,8 @@
 
     <string name="name">နာမည်</string>
     <string name="name_place_holder">နာမည် ထည့်သွင်းပါ။</string>
-    <string name="description">ဖော်ပြချက်</string>
-    <string name="description_place_holder">ဖော်ပြချက် ထည့်သွင်းပါ။</string>
+    <string name="description">အကြောင်းအရာ</string>
+    <string name="description_place_holder">အကြောင်းအရာ ထည့်သွင်းပါ။</string>
 
     <string name="amount">ပမာဏ</string>
     <string name="amount_placeholder">ပမာဏ ထည့်သွင်းပါ။</string>
@@ -16,8 +16,8 @@
     <string name="OK">အတည်ပြုပါ။</string>
     <string name="date">ရက်စွဲ</string>
     <string name="date_less_current">ရက်စွဲသည် လက်ရှိအချိန်ထက် နည်းရမည်။</string>
-    <string name= "edit">မှတ်စုကို တည်းဖြတ်</string>
-    <string name="delete">မှတ်စုကို ဖျက်</string>
+    <string name= "edit">မှတ်စုကို ပြင်မည်။</string>
+    <string name="delete">မှတ်စုကို ဖျက်မည်။</string>
 
     <string name="password">စကားဝှက်</string>
     <string name="new_password">စကားဝှက် အသစ်</string>

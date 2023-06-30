@@ -1,8 +1,6 @@
 package com.omgea.mynote.screen.home.components
 
 import com.omgea.mynote.model.UserVo
-
-
 data class HomeState(
     val usersList: List<UserVo> = emptyList(),
 

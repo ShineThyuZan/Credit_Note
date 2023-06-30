@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.omgea.mynote.common.SheetHeader
 import com.omgea.mynote.ui.theme.dimen
-
 @Composable
 fun MoreActionSheetView(
     onItemClick: (moreActionStatus: Int) -> Unit

@@ -13,7 +13,6 @@ import androidx.navigation.compose.rememberNavController
 import com.omgea.mynote.graph.MainScreen
 import com.omgea.mynote.ui.theme.MyNoteTheme
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)

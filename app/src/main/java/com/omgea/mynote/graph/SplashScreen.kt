@@ -80,7 +80,7 @@ fun BrandingView(
             ) {
 
                 Text(
-                    text = stringResource(id = R.string.app_name),
+                    text = stringResource(id = R.string.note_list),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary,
                     modifier = modifier.alpha(alpha = alpha)

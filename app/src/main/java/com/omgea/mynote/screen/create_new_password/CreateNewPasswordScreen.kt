@@ -13,13 +13,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.omgea.mynote.R
 import com.omgea.mynote.common.CommonTopBar
 import com.omgea.mynote.common.TopBarType
 
 import com.omgea.mynote.screen.home.components.CreatePasswordAction
 import com.omgea.mynote.screen.home.components.HomeViewModel
-import com.omgea.mynote.screen.home.components.PasswordTextFieldContent
-
 
 @Composable
 fun CreateNewPasswordScreen(
@@ -75,7 +74,7 @@ fun CreateNewPasswordView(
                         CreatePasswordAction.ClickUpdatePassword(password = changePhoneValue.trim())
                     )
                 },
-                phonePlaceHolder = stringResource(id = com.omgea.mynote.R.string.new_password),
+                phonePlaceHolder = stringResource(id = R.string.new_password),
                 phoneImeAction = ImeAction.Done,
                 onPhoneValueCleared = {
                     vm.onCreatePasswordAction(
@@ -83,7 +82,7 @@ fun CreateNewPasswordView(
                     )
                 },
                 isErrorPhone = false,
-                errorMessagePhone = stringResource(id = com.omgea.mynote.R.string.password),
+                errorMessagePhone = stringResource(id = R.string.password),
                 keyboardAction = {
                     keyboardController?.hide()
                 },
