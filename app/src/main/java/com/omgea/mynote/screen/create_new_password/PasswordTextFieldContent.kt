@@ -19,8 +19,8 @@ fun PasswordTextFieldContent(
     modifier: Modifier = Modifier,
     phoneNumber: String,
     onPhoneValueChanged: (String) -> Unit,
-    phonePlaceHolder: String,
     phoneImeAction: ImeAction,
+    phonePlaceHolder: String,
     onPhoneValueCleared: () -> Unit,
     isErrorPhone: Boolean,
     errorMessagePhone: String,
@@ -33,14 +33,12 @@ fun PasswordTextFieldContent(
                 .padding(MaterialTheme.dimen.base_2x),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
             Column(
                 modifier = modifier
                     .fillMaxWidth()
                     .weight(1f)
             ) {
                 VerticalSpacerBase4x()
-
                 PasswordTextFieldSection(
                     phoneNumber = phoneNumber,
                     phonePlaceHolder = phonePlaceHolder,
