@@ -6,9 +6,6 @@ import com.omgea.mynote.model.UserVo
 data class HomeState(
     val usersList: List<UserVo> = emptyList(),
 
-/*    val shouldShowRemoveDialog: Boolean? = false,
-    val shouldShowEditDialog: Boolean? = false,*/
-
     val showDialog: Boolean = false,
     val dialogType: DialogType = DialogType.NOTHING,
 
@@ -17,7 +14,7 @@ data class HomeState(
 
     val passwordForDelete: String = "",
     val passwordForEdit: String = "",
-    val isError: Boolean = false,
+    val isError: Boolean = false
 )
 
 enum class DialogType {
