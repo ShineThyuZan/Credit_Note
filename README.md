@@ -3,7 +3,7 @@
 + Crate Note
 + Create password
 + Delete password 
-+ edit/update note
++ Edit/Update Note
  
 ## Plugin
 + Material 3
