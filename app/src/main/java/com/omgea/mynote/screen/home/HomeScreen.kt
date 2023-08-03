@@ -105,7 +105,6 @@ fun HomeScreen(
             }
         }
     }
-
     Scaffold(
         topBar = {
             HomeTopBar()
@@ -140,7 +139,6 @@ fun HomeTopBar(
     modifier: Modifier = Modifier
 ) {
     SmallTopAppBar(
-
         title = {
             Text(
                 text = stringResource(id = R.string.note_list),
@@ -149,7 +147,7 @@ fun HomeTopBar(
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
             )
-        },
+        }
     )
 }
 
@@ -184,8 +182,8 @@ fun HomeFab(
     FloatingActionButton(
         onClick = onFabClicked,
         modifier = modifier
-            .height(52.dp)
-            .widthIn(min = 52.dp),
+            .height(56.dp)
+            .widthIn(min = 56.dp),
     ) {
         Icon(
             imageVector = Icons.Outlined.Add,
