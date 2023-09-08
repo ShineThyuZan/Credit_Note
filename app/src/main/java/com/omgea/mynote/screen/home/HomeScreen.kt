@@ -72,11 +72,9 @@ fun HomeScreen(
                         route = Destination.Edit.passId(it.userId)
                     )
                 }
-
                 HomeEvent.ShowMenu -> {
                     modalBottomSheetState.show()
                 }
-
                 HomeEvent.NavigateToCreatePassword -> {
                     navController.navigate(
                         route = Destination.CreateNewPassword.route
@@ -117,7 +115,6 @@ fun HomeScreen(
                     title = stringResource(id = R.string.edit)
                 )
             }
-
             DialogType.DELETE -> {
                 CommonDialog(
                     modifier = Modifier.fillMaxWidth(),
