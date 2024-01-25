@@ -21,6 +21,8 @@
 - Android Studio will download necessary plugins and sync with Gradle files.
 - Check out the latest commit point at the `main` branch and sync the project.
 - After that you can run on your device or emulator.
+
+## Application Download Link
 - ApkPure Download Link [this link](https://apkpure.net/ynote/com.omgea.mynote)
 
 ## Show Sample Screen 
