@@ -16,7 +16,7 @@
 - [Coroutines :concurrency](https://developer.android.com/kotlin/coroutines)
 - [Dagger Hilt : Dependency Injection](https://developer.android.com/training/dependency-injection/hilt-android)
 
-## How to run BallGuru app in Android Studio?
+## How to run YNote app in Android Studio?
 - Clone project with [this link](https://github.com/ShineThyuZan/Credit_Note)
 - Android Studio will download necessary plugins and sync with Gradle files.
 - Check out the latest commit point at the `main` branch and sync the project.
