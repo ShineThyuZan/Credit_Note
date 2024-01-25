@@ -7,14 +7,21 @@
 + Show Note List Screen 
 
 ## Used library
-+ Jetpack Compose 
-+ Materail 3
-+ Paging 3
-+ Retrofit
-+ Proto Datastore 
-+ Room Database
-+ Coroutines
-+ Dagger - Hilt
+- [Jetpack Libraries](https://developer.android.com/jetpack)
+- [Material Components](https://developer.android.com/design/ui/mobile/guides/components/material-overview)
+- [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
+- [Retrofit](https://square.github.io/retrofit)
+- [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
+- [Room Database](https://developer.android.com/jetpack/androidx/releases/room)
+- [Coroutines :concurrency](https://developer.android.com/kotlin/coroutines)
+- [Dagger Hilt : Dependency Injection](https://developer.android.com/training/dependency-injection/hilt-android)
+
+## How to run BallGuru app in Android Studio?
+- Clone project with [this link](https://github.com/ShineThyuZan/Credit_Note)
+- Android Studio will download necessary plugins and sync with Gradle files.
+- Check out the latest commit point at the `main` branch and sync the project.
+- After that you can run on your device or emulator.
+- ApkPure Download Link [this link](https://apkpure.net/ynote/com.omgea.mynote)
 
 ## Show Sample Screen 
 <div style="display: flex; justify-content: center; padding: 55px; ">
