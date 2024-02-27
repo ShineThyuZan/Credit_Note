@@ -20,7 +20,6 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
     private val vmState = MutableStateFlow(MainViewModelState())
 
-
     val appLocale = vmState
         .map(MainViewModelState::asAppLocale)
         .stateIn(

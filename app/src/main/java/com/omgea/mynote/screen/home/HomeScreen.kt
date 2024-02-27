@@ -225,7 +225,6 @@ fun HomeScreen(
                             viewModel.onAction(
                                 HomeAction.ClickEdit(user = state.editUser)
                             )
-                            /* download()*/
                         }
 
                         MoreActionStatus.DELETE.index -> {
@@ -235,7 +234,6 @@ fun HomeScreen(
                             viewModel.onAction(
                                 HomeAction.ClickDelete(user = state.clearUser)
                             )
-                            /*  vm.onActionImage(ImageAction.ClickReport)*/
                         }
                     }
                 }

@@ -1,36 +1,30 @@
 package com.omgea.mynote.screen.home.components
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.omgea.mynote.screen.home.sheet_view.LanguageViewModelState
 import com.omgea.mynote.use_cases.DeleteUserUseCase
 import com.omgea.mynote.use_cases.GetUserListUseCase
-import com.omgea.mynote.use_cases.GetUsersUseCase
+import com.omgea.mynote.use_cases.GetUsersByNameOrderUseCase
 import com.omgea.mynote.use_cases.LocalPullUseCase
 import com.omgea.mynote.use_cases.LocalePutUseCase
 import com.omgea.mynote.use_cases.PasswordPullUseCase
 import com.omgea.mynote.use_cases.PasswordPutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val deleteUserUseCase: DeleteUserUseCase,
-    getUserListUseCase: GetUserListUseCase,
-    getUsersUseCase: GetUsersUseCase,
+    private val getUserListUseCase: GetUserListUseCase,
+    private val getUsersByNameOrderUseCase: GetUsersByNameOrderUseCase,
     private val pullLocalUseCase: LocalPullUseCase,
     private val putLocaleUseCase: LocalePutUseCase,
     private val passwordPutUseCase: PasswordPutUseCase,
@@ -44,7 +38,7 @@ class HomeViewModel @Inject constructor(
     val homeEvent = _homeEvent.asSharedFlow()
 
     init {
-        getUsersUseCase().onEach { users ->
+        getUsersByNameOrderUseCase().onEach { users ->
             _state.value = state.value.copy(
                 usersList = users
             )

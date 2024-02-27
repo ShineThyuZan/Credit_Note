@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
+    // observe locale in MainActivity and change process
    @RequiresApi(Build.VERSION_CODES.N)
    private suspend fun observeAppLocale() {
         vm.appLocale.collectLatest {

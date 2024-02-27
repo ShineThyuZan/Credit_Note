@@ -92,20 +92,6 @@ fun CustomListItem(
                 .align(alignment = Alignment.End)
                 .wrapContentSize()
         ) {
-            /*  IconButton(onClick = onEditUser) {
-                  Icon(
-                      imageVector = Icons.Filled.Edit,
-                      contentDescription = null,
-                      tint = MaterialTheme.colorScheme.inversePrimary
-                  )
-              }
-              IconButton(onClick = onDeleteUser) {
-                  Icon(
-                      imageVector = Icons.Filled.Delete,
-                      contentDescription = null,
-                      tint = MaterialTheme.colorScheme.inversePrimary
-                  )
-              }*/
             Icon(
                 modifier = Modifier.clickable {
                     onClickMoreActionIcon()
@@ -136,7 +122,6 @@ private fun CustomListItem() {
             onDeleteUser = {},
             onEditUser = {},
             onClickMoreActionIcon = {}
-
         )
     }
 }

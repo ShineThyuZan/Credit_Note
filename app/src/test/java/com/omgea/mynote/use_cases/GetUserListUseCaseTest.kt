@@ -11,13 +11,13 @@ import org.junit.Before
 import org.junit.Test
 
 class GetUserListUseCaseTest {
-    private lateinit var getNotes: GetUsersUseCase
+    private lateinit var getNotes: GetUsersByNameOrderUseCase
     private lateinit var fakeRepository: FakeUserRepository
 
     @Before
     fun setUp() {
         fakeRepository = FakeUserRepository()
-        getNotes = GetUsersUseCase(fakeRepository)
+        getNotes = GetUsersByNameOrderUseCase(fakeRepository)
 
         val notesToInsert = mutableListOf<UserVo>()
         ('a'..'z').forEachIndexed { index, c ->

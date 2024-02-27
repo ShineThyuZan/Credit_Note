@@ -1,4 +1,4 @@
-package com.youknow.dispatchers
+package com.omgea.mynote.di
 
 import dagger.Module
 import dagger.Provides

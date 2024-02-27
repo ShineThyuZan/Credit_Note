@@ -23,7 +23,6 @@ import com.omgea.mynote.ui.theme.dimen
 import kotlinx.coroutines.delay
 import com.omgea.mynote.R
 
-
 @Composable
 fun SplashScreen(
     navController: NavController,

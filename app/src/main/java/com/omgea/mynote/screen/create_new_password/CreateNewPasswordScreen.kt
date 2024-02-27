@@ -50,7 +50,7 @@ fun CreateNewPasswordView(
     Scaffold(
         topBar = {
             CommonTopBar(
-                navIcon = painterResource(id = com.omgea.mynote.R.drawable.ic_chevron_left),
+                navIcon = painterResource(id = R.drawable.ic_chevron_left),
                 onNavIconClicked = {
                     navController.popBackStack()
                 },
