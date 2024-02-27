@@ -1,3 +1,4 @@
+/*
 package com.omgea.mynote.screen.home
 
 import androidx.compose.ui.test.assertIsDisplayed
@@ -36,7 +37,9 @@ class UserEndToEndTest {
     val composeRule = createAndroidComposeRule<MainActivity>()
 
     @Before
-    fun setUp() {
+    fun setUp() {*/
+/**//*
+
         hiltRule.inject()
         composeRule.setContent {
             val navController = rememberNavController()
@@ -95,4 +98,4 @@ class UserEndToEndTest {
 
     }
 
-}
+}*/

@@ -107,7 +107,7 @@ class EditViewModel @Inject constructor(
 
     // this edit(update ) btn for enable and disable state
     private fun isEnableState() {
-        if (state.value.age == "" && state.value.date == "" && state.value.userName == "" && state.value.lastName == "") {
+        if (state.value.age == "" || state.value.date == "" || state.value.userName == "" || state.value.lastName == "") {
             _state.value = state.value.copy(
                 isEnable = false
             )
