@@ -61,7 +61,7 @@ fun CustomListItem(
                 textAlign = TextAlign.Start
             )
             Text(
-                text = stringResource(id = R.string.description) + " - " + user.lastName,
+                text = stringResource(id = R.string.description) + " - " + user.description,
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.End
             )
@@ -78,7 +78,7 @@ fun CustomListItem(
                 textAlign = TextAlign.Start
             )
             Text(
-                text = stringResource(id = R.string.amount) + " - " + user.age.toString(),
+                text = stringResource(id = R.string.amount) + " - " + user.amount.toString(),
                 style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.primary),
                 textAlign = TextAlign.End
             )
@@ -129,8 +129,8 @@ private fun CustomListItem() {
             user = UserVo(
                 id = 0,
                 name = "Iran",
-                lastName = "5-0",
-                age = 2000,
+                description = "5-0",
+                amount = 2000,
                 date = "11.12.2022"
             ),
             onDeleteUser = {},

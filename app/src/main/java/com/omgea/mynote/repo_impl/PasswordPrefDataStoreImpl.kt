@@ -63,5 +63,4 @@ class PasswordPrefDataStoreImpl @Inject constructor(
             it[LOCALE] ?: true
         }.flowOn(io)
     }
-
 }

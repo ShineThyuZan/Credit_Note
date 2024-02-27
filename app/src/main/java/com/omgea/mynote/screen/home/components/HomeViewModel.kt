@@ -37,39 +37,11 @@ class HomeViewModel @Inject constructor(
     private val passwordPullUseCase: PasswordPullUseCase,
 ) : ViewModel() {
 
-    private val vmState = MutableStateFlow(LanguageViewModelState())
-/*    val locale = vmState
-        .map(LanguageViewModelState::asLocale)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Eagerly,
-            initialValue = vmState.value.asLocale()
-        )
-    val shouldShowLoading = vmState
-        .map(LanguageViewModelState::asLoading)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Eagerly,
-            initialValue = vmState.value.asLoading()
-        )*/
-
     private val _state = mutableStateOf(HomeState())
     val state: State<HomeState> = _state
 
     private val _homeEvent = MutableSharedFlow<HomeEvent>()
     val homeEvent = _homeEvent.asSharedFlow()
-
-    /*
-        init {
-            getUserListUseCase().onEach { usersList ->
-                _state.value = state.value.copy(
-                    usersList = usersList.asReversed()
-                )
-            }.launchIn(viewModelScope)
-
-            getPasswordFormDataStore()
-        }
-    */
 
     init {
         getUsersUseCase().onEach { users ->
@@ -88,7 +60,6 @@ class HomeViewModel @Inject constructor(
                     isDefaultLocal = it
                 )
             }
-           // Log.d("isLocale.pull", state.value.isDefaultLocal.toString())
         }
     }
 
@@ -137,9 +108,6 @@ class HomeViewModel @Inject constructor(
                 _state.value = state.value.copy(
                     password = action.passwordValueChange
                 )
-                /*    error = loginState.value.error.copy(
-                        errorPassword = false
-                    )*/
             }
 
             is HomeAction.ClickEdit -> {
@@ -258,7 +226,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun updateLocale(isDefault: Boolean) {
-        Log.d("isLocale.choose", isDefault.toString())
         viewModelScope.launch {
             putLocaleUseCase.invoke(
                 isDefaultLocale = isDefault

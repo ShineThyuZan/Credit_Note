@@ -37,11 +37,6 @@ object AppModule {
     ): UserRepository {
         return UserRepositoryImpl(db.userDao, dispatcher)
     }
-
-    /*    @Provides
-        @UserRepositoryIo
-        fun provideUserIoDispatcher() : CoroutineDispatcher = Dispatchers.IO*/
-
     @Provides
     @PasswordIo
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
@@ -50,10 +45,6 @@ object AppModule {
 @Module
 @InstallIn(SingletonComponent::class)
 interface PasswordRepository {
-    /* @Singleton
-     @Binds
-     fun bindsAuthApiRepository(authApiRepo: AuthApiRepositoryImpl): AuthApiRepository
- */
     @Singleton
     @Binds
     fun bindsAuthDsRepository(authDsRepo: PasswordDsRepositoryImpl): PasswordDsRepository
@@ -63,7 +54,3 @@ interface PasswordRepository {
 @Qualifier
 annotation class PasswordIo
 
-/*
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class UserRepositoryIo*/

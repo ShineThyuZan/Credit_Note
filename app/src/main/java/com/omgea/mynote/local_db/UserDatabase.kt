@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.omgea.mynote.model.UserVo
 @Database(
     entities = [UserVo::class],
-    version = 5,
+    version = 1,
     exportSchema = false
 )
 abstract class UserDatabase : RoomDatabase() {

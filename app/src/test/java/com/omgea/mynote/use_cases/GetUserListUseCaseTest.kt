@@ -24,9 +24,9 @@ class GetUserListUseCaseTest {
             notesToInsert.add(
                 UserVo(
                     name = c.toString(),
-                    lastName = c.toString(),
+                    description = c.toString(),
                     id = index,
-                    age = c.toInt()
+                    amount = c.toInt()
                 )
             )
         }

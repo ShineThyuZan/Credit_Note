@@ -18,9 +18,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.omgea.mynote.R
 import com.omgea.mynote.screen.edit.udf.EditAction
+import com.omgea.mynote.screen.edit.udf.EditUIEvent
 import com.omgea.mynote.ui.theme.MyNoteTheme
 import kotlinx.coroutines.flow.collectLatest
 import java.util.Calendar
+
 @OptIn(
     ExperimentalMaterial3Api::class,
     ExperimentalComposeUiApi::class
@@ -56,22 +58,10 @@ fun NoteEditScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
-                is EditViewModel.EditUIEvent.SaveUser -> {
-                    navController.navigateUp()
-                }
-
-                EditViewModel.EditUIEvent.HideDobPicker -> {
-                    datePickerDialog.hide()
-                }
-
-                EditViewModel.EditUIEvent.ShowDobPicker -> {
-                    datePickerDialog.show()
-                }
-
-                is EditViewModel.EditUIEvent.ShowSnackBar -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = event.message
-                    )
+                is EditUIEvent.SaveUser -> { navController.navigateUp() }
+                EditUIEvent.HideDobPicker -> { datePickerDialog.hide() }
+                EditUIEvent.ShowDobPicker -> { datePickerDialog.show() }
+                is EditUIEvent.ShowSnackBar -> { scaffoldState.snackbarHostState.showSnackbar(message = event.message)
                 }
             }
         }

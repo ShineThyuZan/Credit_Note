@@ -17,16 +17,12 @@ sealed class HomeAction {
     object ClickNewPassword : HomeAction()
     object ClickNewPasswordCancel : HomeAction()
     object ClickNewPasswordOk : HomeAction()
-
     object ClickLanguage : HomeAction()
-
     data class ClickActionMore(val user: UserVo) : HomeAction()
-
     data class PasswordValueChange(val passwordValueChange: String) : HomeAction()
     data class PasswordEditValueChange(val passwordValueChange: String) : HomeAction()
 }
 
 sealed class CreatePasswordAction {
     data class ClickUpdatePassword(val password: String) : CreatePasswordAction()
-
 }

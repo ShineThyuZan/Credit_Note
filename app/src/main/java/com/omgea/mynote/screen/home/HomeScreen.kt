@@ -60,8 +60,7 @@ fun HomeScreen(
     val DEFAULT_PASSWORD = "0000"
     val listState = rememberLazyListState()
     val isScrolled = remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
-    /*    val appLocale = viewModel.locale.collectAsStateLifecycleAware()
-        val shouldShowLoading = viewModel.shouldShowLoading.collectAsStateLifecycleAware()*/
+
     if (state.isDefaultLocal)
         DeviceLanguage(locale = LocaleType.English)
     else
@@ -207,7 +206,7 @@ fun HomeScreen(
                             viewModel.updateLocale(true)
                         }
                     },
-                    title = stringResource(id = R.string.language_my_desc) + "/" + stringResource(id = R.string.language_en_desc)
+                    title = stringResource(id = R.string.language_my_desc) + "/" + stringResource(id = R.string.language_english)
                 )
             }
         }

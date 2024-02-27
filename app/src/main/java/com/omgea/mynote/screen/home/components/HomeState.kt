@@ -10,7 +10,6 @@ data class HomeState(
 
     val showDialog: Boolean = false,
     val dialogType: DialogType = DialogType.NOTHING,
-
     val clearUser: UserVo = UserVo(),
     val editUser: UserVo = UserVo(),
 
@@ -18,9 +17,7 @@ data class HomeState(
     val actionPassword: String = "",
     val password: String = "",
     val passwordFormDs: String = "",
-
     val isError: Boolean = false,
-
     val isDefaultLocal : Boolean = true
 )
 

@@ -65,13 +65,13 @@ fun UserItem(
         },
         headlineText = {
             Text(
-                text = stringResource(id = R.string.description) + " - " + user.lastName,
+                text = stringResource(id = R.string.description) + " - " + user.description,
                 style = MaterialTheme.typography.titleMedium
             )
         },
         supportingText = {
             Text(
-                text = stringResource(id = R.string.amount) + " - " + user.age.toString(),
+                text = stringResource(id = R.string.amount) + " - " + user.amount.toString(),
                 style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.primary)
             )
         },
@@ -90,7 +90,7 @@ fun UserItem(
 fun PreviewUserItem() {
     MyNoteTheme {
         UserItem(
-            user = UserVo(name = "Adam", lastName = "Smith", age = 15),
+            user = UserVo(name = "Adam", description = "Smith", amount = 15),
             onEditUser = {},
             onDeleteUser = {}
         )

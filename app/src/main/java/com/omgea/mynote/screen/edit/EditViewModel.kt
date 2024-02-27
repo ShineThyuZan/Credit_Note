@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.omgea.mynote.common.DateTimeUtil
 import com.omgea.mynote.model.UserVo
 import com.omgea.mynote.screen.edit.udf.EditAction
+import com.omgea.mynote.screen.edit.udf.EditUIEvent
 import com.omgea.mynote.screen.edit.udf.UserInfoState
 import com.omgea.mynote.use_cases.GetUserUseCase
 import com.omgea.mynote.use_cases.InsertUserUseCase
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class EditViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
@@ -31,6 +33,7 @@ class EditViewModel @Inject constructor(
     val eventFlow = _eventFlow.asSharedFlow()
 
     private var currentUserId: Int? = null
+
     init {
         savedStateHandle.get<Int>("userId")?.let { userId ->
             if (userId != -1) {
@@ -39,8 +42,8 @@ class EditViewModel @Inject constructor(
                         currentUserId = user.id
                         _state.value = state.value.copy(
                             userName = user.name,
-                            lastName = user.lastName,
-                            age = user.age.toString(),
+                            lastName = user.description,
+                            age = user.amount.toString(),
                             date = user.date
                         )
                     }
@@ -56,31 +59,29 @@ class EditViewModel @Inject constructor(
                     userName = action.nameText,
                     isSomethingEdited = true
                 )
+                isEnableState()
             }
+
             is EditAction.EnteredDescription -> {
+                isEnableState()
                 _state.value = state.value.copy(
                     lastName = action.descText,
                     isSomethingEdited = true
                 )
             }
+
             is EditAction.EnterAmount -> {
                 _state.value = state.value.copy(
                     age = action.amountText,
                     isSomethingEdited = true
                 )
-                if (action.amountText == "" || state.value.userName == "") {
-                    _state.value = state.value.copy(
-                        isEnable = false
-                    )
-                } else {
-                    _state.value = state.value.copy(
-                        isEnable = true
-                    )
-                }
+                isEnableState()
             }
+
             EditAction.InsertUser -> {
                 validateForUpdate()
             }
+
             EditAction.ClickDobPicker -> {
                 viewModelScope.launch {
                     _eventFlow.emit(
@@ -88,11 +89,13 @@ class EditViewModel @Inject constructor(
                     )
                 }
             }
+
             is EditAction.ChangeDob -> {
                 _state.value = state.value.copy(
                     date = action.dob,
                     isSomethingEdited = true
                 )
+                isEnableState()
                 viewModelScope.launch {
                     _eventFlow.emit(
                         EditUIEvent.HideDobPicker
@@ -102,9 +105,21 @@ class EditViewModel @Inject constructor(
         }
     }
 
+    // this edit(update ) btn for enable and disable state
+    private fun isEnableState() {
+        if (state.value.age == "" && state.value.date == "" && state.value.userName == "" && state.value.lastName == "") {
+            _state.value = state.value.copy(
+                isEnable = false
+            )
+        } else {
+            _state.value = state.value.copy(
+                isEnable = true
+            )
+        }
+    }
+
     private fun validateForUpdate() {
-        val dobLong =
-            DateTimeUtil.getMilliFromDate(state.value.date)
+        val dobLong = DateTimeUtil.getMilliFromDate(state.value.date)
         validateUseCase.invoke(
             dob = dobLong
         ).apply {
@@ -114,7 +129,7 @@ class EditViewModel @Inject constructor(
         }.also {
             if (!state.value.isSomethingEdited) {
                 viewModelScope.launch {
-                    _eventFlow.emit(EditUIEvent.ShowSnackBar(message = "ဘာမှမပြောင်းလဲပါ !"))
+                    _eventFlow.emit(EditUIEvent.ShowSnackBar(message = "Nothing changes..."))
                 }
                 return
             }
@@ -129,21 +144,13 @@ class EditViewModel @Inject constructor(
             insertUserUseCase(
                 UserVo(
                     name = state.value.userName!!,
-                    lastName = state.value.lastName!!,
-                    age = state.value.age!!.toInt(),
+                    description = state.value.lastName!!,
+                    amount = state.value.age!!.toInt(),
                     id = currentUserId,
                     date = state.value.date!!
                 )
             )
             _eventFlow.emit(EditUIEvent.SaveUser)
         }
-    }
-
-
-    sealed class EditUIEvent {
-        object SaveUser : EditUIEvent()
-        object ShowDobPicker : EditUIEvent()
-        object HideDobPicker : EditUIEvent()
-        data class ShowSnackBar(val message: String) : EditUIEvent()
     }
 }
