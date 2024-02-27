@@ -18,6 +18,8 @@ sealed class HomeAction {
     object ClickNewPasswordCancel : HomeAction()
     object ClickNewPasswordOk : HomeAction()
 
+    object ClickLanguage : HomeAction()
+
     data class ClickActionMore(val user: UserVo) : HomeAction()
 
     data class PasswordValueChange(val passwordValueChange: String) : HomeAction()

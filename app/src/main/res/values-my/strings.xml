@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">စာရင်း</string>
+    <string name="note_list">စာရင်း မှတ်မယ် </string>
+    <string name="add_new_note">မှတ်စုအသစ် ထည့်ပါ</string>
+
+    <string name="name">နာမည်</string>
+    <string name="name_place_holder">နာမည် ထည့်သွင်းပါ။</string>
+    <string name="description">အကြောင်းအရာ</string>
+    <string name="description_place_holder">အကြောင်းအရာ ထည့်သွင်းပါ။</string>
+
+    <string name="amount">ပမာဏ</string>
+    <string name="amount_placeholder">ပမာဏ ထည့်သွင်းပါ။</string>
+    <string name="error">ထည့်သွင်းမှုအမျိုးအစား မတိုက်ဆိုင်ပါ။</string>
+
+    <string name="cancel">မလုပ်တော့ပါ။</string>
+    <string name="OK">အတည်ပြုပါ။</string>
+    <string name="date">ရက်စွဲ</string>
+    <string name="date_less_current">ရက်စွဲသည် လက်ရှိအချိန်ထက် နည်းရမည်။</string>
+    <string name= "edit">မှတ်စုကို ပြင်မည်။</string>
+    <string name="delete">မှတ်စုကို ဖျက်မည်။</string>
+
+    <string name="password">စကားဝှက်</string>
+    <string name="new_password">စကားဝှက် အသစ်</string>
+    <string name="default_password">စကားဝှက် "0000" ဖြင့် ဝင်ပါ။</string>
+
+    <string name="language_myanmar" translatable="false">Myanmar</string>
+    <string name="language_my_desc" translatable="false">မြန်မာ</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_en_desc" translatable="false">en</string>
+</resources>

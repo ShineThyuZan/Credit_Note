@@ -22,6 +22,7 @@ import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -45,6 +46,7 @@ fun CommonTextField(
     imeAction: ImeAction = ImeAction.Go,
     isError: Boolean = false,
     errorMessage: String = "",
+    testTag : String = "",
     keyboardAction: (KeyboardActionScope) -> Unit = {},
 ) {
 
@@ -77,6 +79,7 @@ fun CommonTextField(
                     .fillMaxWidth()
                     .padding(horizontal = MaterialTheme.dimen.base)
                     .weight(1f, fill = false)
+                    .testTag(testTag)
                 ,
                 value = value,
                 onValueChange = {

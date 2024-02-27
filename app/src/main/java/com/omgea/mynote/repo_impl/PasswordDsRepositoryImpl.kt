@@ -17,7 +17,18 @@ class PasswordDsRepositoryImpl @Inject constructor(
             pwPref.putPassword(password = password)
         }
     }
+
     override suspend fun pullPassword(): Flow<String> {
         return pwPref.pullPassword().flowOn(context = io)
+    }
+
+    override suspend fun putLocale(isDefault: Boolean) {
+        withContext(io) {
+            pwPref.putLocale(isDefault = isDefault)
+        }
+    }
+
+    override suspend fun pullLocale(): Flow<Boolean> {
+        return pwPref.pullLocale().flowOn(context = io)
     }
 }

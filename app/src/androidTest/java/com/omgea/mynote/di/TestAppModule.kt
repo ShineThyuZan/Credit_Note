@@ -18,15 +18,15 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object TestAppModule {
     @Provides
     @Singleton
-    fun provideUserDatabase(app: Application) = Room.databaseBuilder(
+    fun provideUserDatabase(app: Application) = Room.inMemoryDatabaseBuilder(
         app,
         UserDatabase::class.java,
-        DATABASE_NAME
     ).fallbackToDestructiveMigration().build()
 
     @Provides
@@ -38,10 +38,6 @@ object AppModule {
         return UserRepositoryImpl(db.userDao, dispatcher)
     }
 
-    /*    @Provides
-        @UserRepositoryIo
-        fun provideUserIoDispatcher() : CoroutineDispatcher = Dispatchers.IO*/
-
     @Provides
     @PasswordIo
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
@@ -50,10 +46,6 @@ object AppModule {
 @Module
 @InstallIn(SingletonComponent::class)
 interface PasswordRepository {
-    /* @Singleton
-     @Binds
-     fun bindsAuthApiRepository(authApiRepo: AuthApiRepositoryImpl): AuthApiRepository
- */
     @Singleton
     @Binds
     fun bindsAuthDsRepository(authDsRepo: PasswordDsRepositoryImpl): PasswordDsRepository
@@ -63,7 +55,3 @@ interface PasswordRepository {
 @Qualifier
 annotation class PasswordIo
 
-/*
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class UserRepositoryIo*/

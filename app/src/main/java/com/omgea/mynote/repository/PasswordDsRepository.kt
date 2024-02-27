@@ -6,4 +6,8 @@ interface PasswordDsRepository {
     // User Id ( put / pull )
     suspend fun putPassword(password: String)
     suspend fun pullPassword(): Flow<String>
+
+    suspend fun putLocale( isDefault : Boolean)
+
+    suspend fun pullLocale() : Flow<Boolean>
 }

@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,6 +40,7 @@ import com.omgea.mynote.screen.home.sheet_view.MoreActionSheetView
 import com.omgea.mynote.screen.home.sheet_view.MoreActionStatus
 import com.omgea.mynote.ui.theme.MyNoteTheme
 import com.omgea.mynote.ui.theme.dimen
+import com.omgea.mynote.util.LocaleType
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -58,6 +60,12 @@ fun HomeScreen(
     val DEFAULT_PASSWORD = "0000"
     val listState = rememberLazyListState()
     val isScrolled = remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
+    /*    val appLocale = viewModel.locale.collectAsStateLifecycleAware()
+        val shouldShowLoading = viewModel.shouldShowLoading.collectAsStateLifecycleAware()*/
+    if (state.isDefaultLocal)
+        DeviceLanguage(locale = LocaleType.English)
+    else
+        DeviceLanguage(locale = LocaleType.Myanmar)
 
     BackHandler(enabled = modalBottomSheetState.isVisible) {
         scope.launch {
@@ -72,9 +80,11 @@ fun HomeScreen(
                         route = Destination.Edit.passId(it.userId)
                     )
                 }
+
                 HomeEvent.ShowMenu -> {
                     modalBottomSheetState.show()
                 }
+
                 HomeEvent.NavigateToCreatePassword -> {
                     navController.navigate(
                         route = Destination.CreateNewPassword.route
@@ -115,6 +125,7 @@ fun HomeScreen(
                     title = stringResource(id = R.string.edit)
                 )
             }
+
             DialogType.DELETE -> {
                 CommonDialog(
                     modifier = Modifier.fillMaxWidth(),
@@ -179,6 +190,26 @@ fun HomeScreen(
                     title = title
                 )
             }
+
+            DialogType.LANGUAGE_DIALOG -> {
+                LanguageDialog(
+                    modifier = Modifier.fillMaxWidth(),
+                    dismissButtonLabel = stringResource(id = R.string.language_myanmar),
+                    dismissAction = {
+                        scope.launch {
+                            viewModel.updateLocale(false)
+                        }
+                    },
+                    confirmButtonLabel = stringResource(id = R.string.language_english),
+                    confirmButtonType = ButtonType.SOLID_BUTTON,
+                    confirmButtonAction = {
+                        scope.launch {
+                            viewModel.updateLocale(true)
+                        }
+                    },
+                    title = stringResource(id = R.string.language_my_desc) + "/" + stringResource(id = R.string.language_en_desc)
+                )
+            }
         }
     }
 
@@ -227,7 +258,11 @@ fun HomeScreen(
                     onActionLabelClicked = {
                         viewModel.onAction(HomeAction.ClickNewPassword)
                     },
-                    title = stringResource(id = R.string.note_list)
+                    title = stringResource(id = R.string.note_list),
+                    navIcon = painterResource(id = R.drawable.ic_language),
+                    onNavIconClicked = {
+                        viewModel.onAction(HomeAction.ClickLanguage)
+                    }
                 )
             },
             floatingActionButton = {
@@ -235,7 +270,7 @@ fun HomeScreen(
 
                 } else {
                     HomeFab(
-                        onFabClicked = { navController.navigate(Destination.Edit.route) }
+                        onFabClicked = { navController.navigate(Destination.Edit.route) },
                     )
                 }
             },

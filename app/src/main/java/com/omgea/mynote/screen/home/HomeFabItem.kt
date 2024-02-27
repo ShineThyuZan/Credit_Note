@@ -8,9 +8,12 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.omgea.mynote.R
+import com.omgea.mynote.util.TestTags
+
 @Composable
 fun HomeFab(
     modifier: Modifier = Modifier,
@@ -20,11 +23,13 @@ fun HomeFab(
         onClick = onFabClicked,
         modifier = modifier
             .height(52.dp)
-            .widthIn(min = 52.dp),
+            .widthIn(min = 52.dp)
+            .testTag(TestTags.ORDER_SECTION),
     ) {
         Icon(
             imageVector = Icons.Outlined.Add,
-            contentDescription = stringResource(id = R.string.add_new_note)
+            //contentDescription = stringResource(id = R.string.add_new_note)
+            contentDescription = "Add New Note"
         )
     }
 }

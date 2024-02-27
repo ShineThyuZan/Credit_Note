@@ -16,6 +16,7 @@ import com.omgea.mynote.R
 import com.omgea.mynote.common.CommonTextField
 import com.omgea.mynote.screen.edit.date.DateSection
 import com.omgea.mynote.ui.theme.dimen
+import com.omgea.mynote.util.TestTags
 
 @Composable
 fun NoteEditContent(
@@ -53,7 +54,8 @@ fun NoteEditContent(
             onValueChanged = nameTextChange,
             onValueCleared = nameTextClear,
             errorMessage = stringResource(id = R.string.error),
-            keyboardAction = keyboard
+            keyboardAction = keyboard,
+            testTag = TestTags.TITLE_TEXT_FIELD
         )
 
         Spacer(modifier = Modifier.height(MaterialTheme.dimen.base_2x))
@@ -66,7 +68,8 @@ fun NoteEditContent(
             onValueChanged = descriptionTextChange,
             onValueCleared = descriptionClear,
             errorMessage = stringResource(id = R.string.error),
-            keyboardAction = keyboard
+            keyboardAction = keyboard,
+            testTag = TestTags.TITLE_TEXT_FIELD
         )
 
         Spacer(modifier = Modifier.height(MaterialTheme.dimen.base_2x))
@@ -80,7 +83,7 @@ fun NoteEditContent(
             onValueCleared = amountTextClear,
             errorMessage = stringResource(id = R.string.error),
             keyboardType = KeyboardType.Number,
-            keyboardAction = keyboard
+            keyboardAction = keyboard,
         )
         Spacer(modifier = Modifier.height(MaterialTheme.dimen.base_2x))
 

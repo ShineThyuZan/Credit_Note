@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.omgea.mynote.repo_impl.PasswordPrefDataStore
 import com.omgea.mynote.repo_impl.PasswordPrefDataStoreImpl
+import com.omgea.mynote.repo_impl.PasswordPrefDataStoreImpl.Companion.APP_LOCALE_NAME
 import com.omgea.mynote.repo_impl.PasswordPrefDataStoreImpl.Companion.PASSWORD_PREF_NAME
 import dagger.Module
 import dagger.Provides
@@ -17,6 +18,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 import javax.inject.Singleton
+
 @Module
 @InstallIn(SingletonComponent::class)
 object PasswordPrefModule {
@@ -28,7 +30,8 @@ object PasswordPrefModule {
     ): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             produceFile = {
-                context.preferencesDataStoreFile(PASSWORD_PREF_NAME)
+                context.preferencesDataStoreFile(name = PASSWORD_PREF_NAME)
+                context.preferencesDataStoreFile(name = APP_LOCALE_NAME)
             }
         )
     }

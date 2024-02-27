@@ -7,6 +7,9 @@ class InsertUserUseCase @Inject constructor(
     private val repository: UserRepository
 ) {
     suspend operator fun invoke(user: UserVo) {
+        if(user.name.isBlank()){
+            throw Exception("Name cannot be empty")
+        }
         repository.insertUser(user)
     }
 }
